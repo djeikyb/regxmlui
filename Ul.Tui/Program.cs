@@ -1,4 +1,6 @@
-﻿namespace Ul.Tui;
+﻿using System;
+
+namespace Ul.Tui;
 
 internal static class Program
 {

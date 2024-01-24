@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ul", "Ul\Ul.csproj", "{F880
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ul.Tui", "Ul.Tui\Ul.Tui.csproj", "{8C9AF926-EE91-4D91-A0FE-216E028A27D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ul.Ui", "Ul.Ui\Ul.Ui.csproj", "{801BD1F8-94E2-48E8-9393-1F3BB249B6C5}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,9 +36,5 @@ Global
 		{8C9AF926-EE91-4D91-A0FE-216E028A27D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C9AF926-EE91-4D91-A0FE-216E028A27D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C9AF926-EE91-4D91-A0FE-216E028A27D1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{801BD1F8-94E2-48E8-9393-1F3BB249B6C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{801BD1F8-94E2-48E8-9393-1F3BB249B6C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{801BD1F8-94E2-48E8-9393-1F3BB249B6C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{801BD1F8-94E2-48E8-9393-1F3BB249B6C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

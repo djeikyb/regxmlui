@@ -18,15 +18,6 @@ ViewModels
 
 ~~Cursed~~ Terminal Ui
 
-### Ul.Ui
-
-Avalonia Views (should this be Ul.AvaUi?)
-
 ### Ul.Desktop
 
-Avalonia Desktop Ui (should this be Ul.AvaDesktop?)
-
-### Ul.AvaIos
-
-Doesn't exist and prolly won't.
-But it would depend on Ul.Ui.
+Avalonia Desktop Ui

@@ -5,8 +5,11 @@
   </PropertyGroup>
 
   <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
     <AnalysisLevel>latest</AnalysisLevel>
     <LangVersion>latest</LangVersion>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <PropertyGroup>
