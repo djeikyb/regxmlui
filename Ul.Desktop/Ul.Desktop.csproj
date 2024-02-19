@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
+    <RootNamespace>Ul</RootNamespace>
     <TrimMode>full</TrimMode>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
     <ApplicationIcon>Assets/avalonia-logo.ico</ApplicationIcon>

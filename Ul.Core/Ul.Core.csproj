@@ -3,6 +3,7 @@
   <PropertyGroup>
     <OutputType>Library</OutputType>
     <IsPackable>True</IsPackable>
+    <RootNamespace>Ul</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
