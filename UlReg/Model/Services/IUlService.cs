@@ -1,10 +1,10 @@
-using UlReg.Model.Xml;
+using UlRegBiz.Model.Xml;
 
-namespace UlReg.Model.Services;
+namespace UlRegBiz.Model.Services;
 
 public interface IRegisterService
 {
-    Task<RegisterEntry?> Find(Xml.Ul ul);
-    Task<RegisterEntry?> FindByLastHalf(Xml.Ul ul);
+    Task<RegisterEntry?> Find(Ul ul);
+    Task<RegisterEntry?> FindByLastHalf(Ul ul);
     Task<bool> EntryPropertyAlwaysExists(string property);
 }

@@ -1,9 +1,34 @@
-﻿namespace UlReg.Ui.Desktop;
+﻿using System;
+using Avalonia;
+
+namespace UlReg;
 
 class Program
 {
-    static void Main(string[] args)
+    [STAThread]
+    public static void Main(string[] args)
     {
-        Console.WriteLine("Hello, World!");
+        try
+        {
+            BuildAvaloniaApp()
+                .StartWithClassicDesktopLifetime(args);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
     }
+
+    public static AppBuilder BuildAvaloniaApp()
+        => AppBuilder
+            .Configure<App>()
+            .AfterSetup(
+                _ =>
+                {
+                    App.ConfigureDesktopServices();
+                }
+            )
+            .WithInterFont()
+            .UsePlatformDetect()
+            .LogToTrace();
 }

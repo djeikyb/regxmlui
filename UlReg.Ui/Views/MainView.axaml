@@ -1,0 +1,19 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:views="clr-namespace:UlReg.Views"
+             xmlns:viewModels="clr-namespace:UlReg.ViewModels;assembly=UlReg.Core"
+             FontFamily="avares://Avalonia.Fonts.Inter/Assets#Inter"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="740"
+             x:Class="UlReg.Views.MainView"
+             x:CompileBindings="True" x:DataType="viewModels:MainViewModel">
+  <Design.DataContext>
+    <viewModels:MainViewModel>
+    </viewModels:MainViewModel>
+  </Design.DataContext>
+  <DockPanel>
+    <TextBox DockPanel.Dock="Top" />
+    <TextBlock Text="hiiiiiiiiiiiiiiiii" />
+  </DockPanel>
+</UserControl>

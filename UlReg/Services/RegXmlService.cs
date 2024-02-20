@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Xml.Linq;
 using System.Xml.XPath;
-using UlReg.Model.Services;
-using UlReg.Model.Xml;
+using UlRegBiz.Model.Services;
+using UlRegBiz.Model.Xml;
 
-namespace UlReg.Services;
+namespace UlRegBiz.Services;
 
 public class RegXmlService : IRegisterService
 {

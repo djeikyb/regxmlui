@@ -4,10 +4,35 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <RootNamespace>UlReg</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\UlReg.Core\UlReg.Core.csproj"/>
+    <AvaloniaResource Include="Assets/**"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)"/>
+    <PackageReference Include="Avalonia.Controls.ItemsRepeater" Version="$(AvaloniaVersion)"/>
+    <PackageReference Include="Avalonia.Controls.DataGrid" Version="$(AvaloniaVersion)" />
+    <PackageReference Include="Avalonia.Controls.TreeDataGrid" Version="11.0.2" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="$(AvaloniaVersion)"/>
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="$(AvaloniaVersion)"/>
+    <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)"/>
+    <!-- TODO: -->
+    <!--<PackageReference Include="Dock.Avalonia" Version="$(DockVersion)" />-->
+    <!--<PackageReference Include="NodeEditorAvalonia" Version="$(NodeEditorVersion)" />-->
+    <!--<PackageReference Include="NodeEditorAvalonia.Mvvm" Version="$(NodeEditorVersion)" />-->
+    <PackageReference Include="Markdown.Avalonia" Version="$(MarkdownAvaloniaVersion)"/>
+    <PackageReference Include="Avalonia.HtmlRenderer" Version="$(AvaloniaHtmlRendererVersion)"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\UlReg.Core\UlReg.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Assets\" />
   </ItemGroup>
 
 </Project>
