@@ -3,17 +3,110 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:views="clr-namespace:UlReg.Views"
-             xmlns:viewModels="clr-namespace:UlReg.ViewModels;assembly=UlReg.Core"
+             xmlns:vm="clr-namespace:UlReg.ViewModels;assembly=UlReg.Core"
+             xmlns:objectModel="clr-namespace:System.Collections.ObjectModel;assembly=System.ObjectModel"
              FontFamily="avares://Avalonia.Fonts.Inter/Assets#Inter"
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="740"
              x:Class="UlReg.Views.MainView"
-             x:CompileBindings="True" x:DataType="viewModels:MainViewModel">
+             x:CompileBindings="True" x:DataType="vm:MainViewModel">
   <Design.DataContext>
-    <viewModels:MainViewModel>
-    </viewModels:MainViewModel>
+    <vm:MainViewModel>
+      <vm:MainViewModel.Entries>
+        <objectModel:ObservableCollection x:TypeArguments="vm:RegisterEntryViewModel">
+          <vm:RegisterEntryViewModel Register="groups" Symbol="some sym" DefiningDocument="smp 666"
+                                     Ul="deadbeef.beefcace.feedface.d00d2bad" />
+          <vm:RegisterEntryViewModel Register="groups" Symbol="some sym" DefiningDocument="smp 666"
+                                     Ul="deadbeef.beefcace.feedface.d00d2bad" />
+          <vm:RegisterEntryViewModel Register="groups" Symbol="some sym" DefiningDocument="smp 666"
+                                     Ul="deadbeef.beefcace.feedface.d00d2bad" />
+          <!--         <vm:RegisterEntryViewModel Register="groups" Symbol="some sym" DefiningDocument="smp 666" -->
+          <!--                                    Ul="deadbeef.beefcace.feedface.d00d2bad" /> -->
+          <!--         <vm:RegisterEntryViewModel Register="groups" Symbol="some sym" DefiningDocument="smp 666" -->
+          <!--                                    Ul="deadbeef.beefcace.feedface.d00d2bad" /> -->
+          <!--         <vm:RegisterEntryViewModel Register="groups" Symbol="some sym" DefiningDocument="smp 666" -->
+          <!--                                    Ul="deadbeef.beefcace.feedface.d00d2bad" /> -->
+        </objectModel:ObservableCollection>
+      </vm:MainViewModel.Entries>
+    </vm:MainViewModel>
   </Design.DataContext>
   <DockPanel>
-    <TextBox DockPanel.Dock="Top" />
-    <TextBlock Text="hiiiiiiiiiiiiiiiii" />
+    <Grid DockPanel.Dock="Top"
+          Margin="9 0 9 9">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="auto" />
+        <ColumnDefinition Width="auto" />
+        <ColumnDefinition Width="auto" />
+        <ColumnDefinition Width="auto" />
+      </Grid.ColumnDefinitions>
+
+      <StackPanel Grid.Column="0">
+        <Label Content="Term" />
+        <TextBox IsEnabled="False" />
+      </StackPanel>
+
+      <StackPanel Grid.Column="1" Margin="9 0 0 0">
+        <Label Content="Octet" />
+        <TextBox
+          MaxLength="8"
+          MinWidth="92"
+          Text="{Binding SearchUl0}" />
+      </StackPanel>
+
+      <StackPanel Grid.Column="2" Margin="3 0 0 0">
+        <Label Content="" />
+        <TextBox
+          MaxLength="8"
+          MinWidth="92"
+          Text="{Binding SearchUl4}" />
+      </StackPanel>
+
+      <StackPanel Grid.Column="3" Margin="3 0 0 0">
+        <Label Content="" />
+        <TextBox
+          MaxLength="8"
+          MinWidth="92"
+          Text="{Binding SearchUl8}" />
+      </StackPanel>
+
+      <StackPanel Grid.Column="4" Margin="3 0 0 0">
+        <Label Content="" />
+        <TextBox
+          MaxLength="8"
+          MinWidth="92"
+          Text="{Binding SearchUl12}" />
+      </StackPanel>
+
+    </Grid>
+
+    <TextBlock DockPanel.Dock="Top"
+               Margin="9 9 9 0">
+      <Run Text="Total:" />
+      <Run Text="{Binding Entries.Count}"></Run>
+    </TextBlock>
+
+    <DataGrid ItemsSource="{Binding Entries}"
+              Margin="9 9 9 9"
+              VerticalScrollBarVisibility="Visible"
+              CanUserSortColumns="True"
+              CanUserResizeColumns="True"
+              GridLinesVisibility="All"
+              BorderThickness="1" BorderBrush="Gray"
+              IsReadOnly="True">
+      <DataGrid.Columns>
+        <DataGridTextColumn Header="Register" Binding="{Binding Register}" />
+        <DataGridTextColumn Header="Symbol"
+                            Width="150"
+                            Binding="{Binding Symbol}">
+        </DataGridTextColumn>
+        <DataGridTextColumn Header="Document"
+                            Width="135"
+                            Binding="{Binding DefiningDocument}">
+        </DataGridTextColumn>
+        <DataGridTextColumn Header="UL"
+                            Binding="{Binding Ul}">
+        </DataGridTextColumn>
+      </DataGrid.Columns>
+    </DataGrid>
   </DockPanel>
 </UserControl>
