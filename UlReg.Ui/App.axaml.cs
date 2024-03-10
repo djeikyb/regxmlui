@@ -4,6 +4,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using Avalonia.Platform;
 using Avalonia.Styling;
+using HotAvalonia;
 using Microsoft.Extensions.DependencyInjection;
 using UlReg.Model.Services;
 using UlReg.ViewModels;
@@ -85,6 +86,7 @@ public partial class App : Application
 
     public override void Initialize()
     {
+        this.EnableHotReload(); // MUST precede AvaloniaXamlLoader.Load
         AvaloniaXamlLoader.Load(this);
     }
 
