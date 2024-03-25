@@ -96,14 +96,15 @@
       <DataGrid.Columns>
         <DataGridTextColumn Header="Register" Binding="{Binding Register}" />
         <DataGridTextColumn Header="Symbol"
-                            Width="150"
+                            Width="280"
                             Binding="{Binding Symbol}">
         </DataGridTextColumn>
         <DataGridTextColumn Header="Document"
-                            Width="135"
+                            Width="200"
                             Binding="{Binding DefiningDocument}">
         </DataGridTextColumn>
         <DataGridTextColumn Header="UL"
+                            Width="324"
                             Binding="{Binding Ul}">
         </DataGridTextColumn>
       </DataGrid.Columns>
