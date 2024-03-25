@@ -30,5 +30,6 @@ class Program
             )
             .WithInterFont()
             .UsePlatformDetect()
-            .LogToTrace();
+            .LogToTrace()
+            .UseR3();
 }
