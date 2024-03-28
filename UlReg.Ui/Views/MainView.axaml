@@ -42,7 +42,7 @@
 
       <StackPanel Grid.Column="0">
         <Label Content="Term" />
-        <TextBox Text="{Binding TryMeVm.SearchTerm.Value}"/>
+        <TextBox Name="InputSearchTerm" Text="{Binding TryMeVm.SearchTerm.Value}"/>
       </StackPanel>
 
       <StackPanel Grid.Column="1" Margin="9 0 0 0">
