@@ -82,6 +82,11 @@ public class RegXmlService : IRegisterService
                 chain = chain.Or(re => re.Ul.ToOctets().Contains(t, StringComparison.InvariantCultureIgnoreCase));
             }
 
+            if (term is { Length: > 4 })
+            {
+                chain = chain.Or(re => re.Symbol.Contains(term, StringComparison.InvariantCultureIgnoreCase));
+            }
+
             q = q.Where(chain);
         }
 
