@@ -8,7 +8,7 @@
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
-    <AvaloniaVersion>11.0.9</AvaloniaVersion>
+    <AvaloniaVersion>11.1.2</AvaloniaVersion>
     <DockVersion>11.0.0</DockVersion>
     <NodeEditorVersion>11.0.0</NodeEditorVersion>
     <CommunityToolkitMvvmVersion>8.2.2</CommunityToolkitMvvmVersion>
