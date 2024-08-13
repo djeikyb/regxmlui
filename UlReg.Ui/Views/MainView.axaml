@@ -93,6 +93,11 @@
               GridLinesVisibility="All"
               BorderThickness="1" BorderBrush="Gray"
               IsReadOnly="True">
+      <DataGrid.Styles>
+        <Style Selector="DataGridCell">
+          <Setter Property="FontSize" Value="13"/>
+        </Style>
+      </DataGrid.Styles>
       <DataGrid.Columns>
         <DataGridTextColumn Header="Register" Binding="{Binding Register}" />
         <DataGridTextColumn Header="Symbol"
