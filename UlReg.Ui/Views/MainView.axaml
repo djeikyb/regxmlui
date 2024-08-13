@@ -2,7 +2,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:views="clr-namespace:UlReg.Views"
              xmlns:vm="clr-namespace:UlReg.ViewModels;assembly=UlReg.Core"
              xmlns:objectModel="clr-namespace:System.Collections.ObjectModel;assembly=System.ObjectModel"
              FontFamily="avares://Avalonia.Fonts.Inter/Assets#Inter"
@@ -42,7 +41,7 @@
 
       <StackPanel Grid.Column="0">
         <Label Content="Term" />
-        <TextBox Name="InputSearchTerm" Text="{Binding TryMeVm.SearchTerm.Value}"/>
+        <TextBox Name="InputSearchTerm" Text="{Binding SearchTerm.Value}"/>
       </StackPanel>
 
       <StackPanel Grid.Column="1" Margin="9 0 0 0">
@@ -50,7 +49,7 @@
         <TextBox
           MaxLength="8"
           MinWidth="92"
-          Text="{Binding SearchUl0}" />
+          Text="{Binding SearchUl0.Value}" />
       </StackPanel>
 
       <StackPanel Grid.Column="2" Margin="3 0 0 0">
@@ -58,7 +57,7 @@
         <TextBox
           MaxLength="8"
           MinWidth="92"
-          Text="{Binding SearchUl4}" />
+          Text="{Binding SearchUl4.Value}" />
       </StackPanel>
 
       <StackPanel Grid.Column="3" Margin="3 0 0 0">
@@ -66,7 +65,7 @@
         <TextBox
           MaxLength="8"
           MinWidth="92"
-          Text="{Binding SearchUl8}" />
+          Text="{Binding SearchUl8.Value}" />
       </StackPanel>
 
       <StackPanel Grid.Column="4" Margin="3 0 0 0">
@@ -74,7 +73,7 @@
         <TextBox
           MaxLength="8"
           MinWidth="92"
-          Text="{Binding SearchUl12}" />
+          Text="{Binding SearchUl12.Value}" />
       </StackPanel>
 
     </Grid>

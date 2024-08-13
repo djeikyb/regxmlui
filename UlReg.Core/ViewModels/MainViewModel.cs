@@ -1,5 +1,4 @@
 using System.Collections.ObjectModel;
-using CommunityToolkit.Mvvm.ComponentModel;
 using R3;
 using RegXml;
 using UlRegBiz.Model.Services;
@@ -8,54 +7,13 @@ using UlRegBiz.Services;
 
 namespace UlReg.ViewModels;
 
-public class TryMeVm : IDisposable
+public class MainViewModel : IDisposable
 {
-    public TryMeVm(MainViewModel mvm)
-    {
-        SearchTerm = new BindableReactiveProperty<string?>(string.Empty);
-        SearchTerm
-            .Debounce(TimeSpan.FromMilliseconds(200))
-            .Subscribe(s =>
-                {
-                    Console.WriteLine(s);
-                    mvm.RefreshTable();
-                }
-            );
-    }
-
-    public BindableReactiveProperty<string?> SearchTerm { get; }
-
-    public void Dispose()
-    {
-        SearchTerm.Dispose();
-    }
-}
-
-public partial class MainViewModel : ObservableObject
-{
-    [ObservableProperty]
-    private bool _topmost;
-
-    // [ObservableProperty]
-    // private string? _searchTerm;
-
-    [ObservableProperty]
-    private string? _searchUl0;
-
-    [ObservableProperty]
-    private string? _searchUl4;
-
-    [ObservableProperty]
-    private string? _searchUl8;
-
-    [ObservableProperty]
-    private string? _searchUl12;
-
     private readonly IRegisterService _register;
 
     public MainViewModel()
     {
-        Topmost = false;
+        Topmost = new(false);
         var registers = Registers.FromEmbedded();
         _register = new MultiRegisterRegXmlService(
             new RegXmlService(registers.Elements.Xml),
@@ -68,57 +26,71 @@ public partial class MainViewModel : ObservableObject
             _register.All().Select(re => new RegisterEntryViewModel(re))
         );
 
-        TryMeVm = new TryMeVm(this);
+        SearchTerm = new BindableReactiveProperty<string?>(string.Empty);
+        SearchUl0 = new();
+        SearchUl4 = new();
+        SearchUl8 = new();
+        SearchUl12 = new();
+
+        Observable
+            .Merge(SearchTerm, SearchUl0, SearchUl4, SearchUl8, SearchUl12)
+            .Debounce(TimeSpan.FromMilliseconds(200))
+            .Subscribe(_ => RefreshTable());
     }
 
-    public TryMeVm TryMeVm { get; }
+    public BindableReactiveProperty<string?> SearchTerm { get; }
+    public BindableReactiveProperty<bool> Topmost { get; }
+    public BindableReactiveProperty<string?> SearchUl0 { get; }
+    public BindableReactiveProperty<string?> SearchUl4 { get; }
+    public BindableReactiveProperty<string?> SearchUl8 { get; }
+    public BindableReactiveProperty<string?> SearchUl12 { get; }
 
     public ObservableCollection<RegisterEntryViewModel> Entries { get; init; }
-
-    // partial void OnSearchTermChanged(string? _) => RefreshTable();
-    partial void OnSearchUl0Changed(string? _) => RefreshTable();
-    partial void OnSearchUl4Changed(string? _) => RefreshTable();
-    partial void OnSearchUl8Changed(string? _) => RefreshTable();
-    partial void OnSearchUl12Changed(string? _) => RefreshTable();
 
     internal void RefreshTable()
     {
         Entries.Clear();
 
-        if (SearchUl0 is not { Length: > 0 }
-            && SearchUl4 is not { Length: > 0 }
-            && SearchUl8 is not { Length: > 0 }
-            && SearchUl12 is not { Length: > 0 }
-            && TryMeVm.SearchTerm.Value is not { Length: > 2 } st)
+        if (SearchUl0.Value is not { Length: > 0 }
+            && SearchUl4.Value is not { Length: > 0 }
+            && SearchUl8.Value is not { Length: > 0 }
+            && SearchUl12.Value is not { Length: > 0 }
+            && SearchTerm.Value is not { Length: > 2 })
         {
             foreach (var re in _register.All()) Entries.Add(new RegisterEntryViewModel(re));
         }
         else
         {
-            foreach (var vm in _register.Search(TryMeVm.SearchTerm.Value, SearchUl0, SearchUl4, SearchUl8, SearchUl12)
+            foreach (var vm in _register.Search(SearchTerm.Value, SearchUl0.Value, SearchUl4.Value, SearchUl8.Value, SearchUl12.Value)
                          .Select(re => new RegisterEntryViewModel(re)))
             {
                 Entries.Add(vm);
             }
         }
     }
+
+    public void Dispose()
+    {
+        SearchTerm.Dispose();
+        Topmost.Dispose();
+        SearchUl0.Dispose();
+        SearchUl4.Dispose();
+        SearchUl8.Dispose();
+        SearchUl12.Dispose();
+    }
 }
 
-public partial class RegisterEntryViewModel : ObservableObject
+public class RegisterEntryViewModel
 {
     private readonly RegisterEntry _re;
 
-    [ObservableProperty]
-    private string? _ul;
+    public string? Ul { get; }
 
-    [ObservableProperty]
-    private string? _register;
+    public string? Register { get; }
 
-    [ObservableProperty]
-    private string? _definingDocument;
+    public string? DefiningDocument { get; }
 
-    [ObservableProperty]
-    private string? _symbol;
+    public string? Symbol { get; }
 
     public RegisterEntryViewModel()
     {
@@ -127,9 +99,9 @@ public partial class RegisterEntryViewModel : ObservableObject
     public RegisterEntryViewModel(RegisterEntry re)
     {
         _re = re;
-        _ul = re.Ul.ToOctets();
-        _register = re.Register;
-        _definingDocument = re.DefiningDocument;
-        _symbol = re.Symbol;
+        Ul = re.Ul.ToOctets();
+        Register = re.Register;
+        DefiningDocument = re.DefiningDocument;
+        Symbol = re.Symbol;
     }
 }

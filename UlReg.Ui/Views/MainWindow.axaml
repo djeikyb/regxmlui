@@ -18,7 +18,7 @@
         Height="740"
         WindowState="Normal"
         WindowStartupLocation="Manual"
-        Topmost="{Binding Topmost}"
+        Topmost="{Binding Topmost.Value}"
         FontSize="13"
         x:Name="Main"
         x:CompileBindings="True" x:DataType="vm:MainViewModel">
