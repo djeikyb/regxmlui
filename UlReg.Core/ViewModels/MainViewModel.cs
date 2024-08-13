@@ -2,7 +2,6 @@ using System.Collections.ObjectModel;
 using R3;
 using RegXml;
 using UlRegBiz.Model.Services;
-using UlRegBiz.Model.Xml;
 using UlRegBiz.Services;
 
 namespace UlReg.ViewModels;
@@ -77,31 +76,5 @@ public class MainViewModel : IDisposable
         SearchUl4.Dispose();
         SearchUl8.Dispose();
         SearchUl12.Dispose();
-    }
-}
-
-public class RegisterEntryViewModel
-{
-    private readonly RegisterEntry _re;
-
-    public string? Ul { get; }
-
-    public string? Register { get; }
-
-    public string? DefiningDocument { get; }
-
-    public string? Symbol { get; }
-
-    public RegisterEntryViewModel()
-    {
-    }
-
-    public RegisterEntryViewModel(RegisterEntry re)
-    {
-        _re = re;
-        Ul = re.Ul.ToOctets();
-        Register = re.Register;
-        DefiningDocument = re.DefiningDocument;
-        Symbol = re.Symbol;
     }
 }
