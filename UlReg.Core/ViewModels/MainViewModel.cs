@@ -13,6 +13,7 @@ public class MainViewModel : IDisposable
     public MainViewModel()
     {
         Topmost = new(false);
+
         var registers = Registers.FromEmbedded();
         _register = new MultiRegisterRegXmlService(
             new RegXmlService(registers.Elements.Xml),
@@ -21,6 +22,7 @@ public class MainViewModel : IDisposable
             new RegXmlService(registers.Labels.Xml),
             new RegXmlService(registers.Types.Xml)
         );
+
         Entries = new ObservableCollection<RegisterEntryViewModel>(
             _register.All().Select(re => new RegisterEntryViewModel(re))
         );
@@ -43,7 +45,6 @@ public class MainViewModel : IDisposable
     public BindableReactiveProperty<string?> SearchUl4 { get; }
     public BindableReactiveProperty<string?> SearchUl8 { get; }
     public BindableReactiveProperty<string?> SearchUl12 { get; }
-
     public ObservableCollection<RegisterEntryViewModel> Entries { get; init; }
 
     internal void RefreshTable()
@@ -60,7 +61,10 @@ public class MainViewModel : IDisposable
         }
         else
         {
-            foreach (var vm in _register.Search(SearchTerm.Value, SearchUl0.Value, SearchUl4.Value, SearchUl8.Value, SearchUl12.Value)
+            foreach (var vm in _register.Search(
+                             SearchTerm.Value,
+                             SearchUl0.Value, SearchUl4.Value,
+                             SearchUl8.Value, SearchUl12.Value)
                          .Select(re => new RegisterEntryViewModel(re)))
             {
                 Entries.Add(vm);
