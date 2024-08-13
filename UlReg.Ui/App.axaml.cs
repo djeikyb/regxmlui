@@ -4,7 +4,6 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using Avalonia.Platform;
 using HotAvalonia;
-using Microsoft.Extensions.DependencyInjection;
 using UlReg.ViewModels;
 using UlReg.Views;
 
@@ -12,13 +11,6 @@ namespace UlReg;
 
 public class App : Application
 {
-    public static void ConfigureDesktopServices()
-    {
-        IServiceCollection services = new ServiceCollection();
-        services.AddTransient<MainViewModel>();
-        Defaults.Locator.ConfigureServices(services.BuildServiceProvider());
-    }
-
     public override void Initialize()
     {
         this.EnableHotReload(); // MUST precede AvaloniaXamlLoader.Load
@@ -31,7 +23,7 @@ public class App : Application
         {
             var mainWindow = new MainWindow
             {
-                DataContext = Defaults.Locator.GetService<MainViewModel>()
+                DataContext = new MainViewModel()
             };
             desktop.MainWindow = mainWindow;
         }

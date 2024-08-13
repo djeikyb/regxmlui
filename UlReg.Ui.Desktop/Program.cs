@@ -22,12 +22,6 @@ class Program
     public static AppBuilder BuildAvaloniaApp()
         => AppBuilder
             .Configure<App>()
-            .AfterSetup(
-                _ =>
-                {
-                    App.ConfigureDesktopServices();
-                }
-            )
             .WithInterFont()
             .UsePlatformDetect()
             .LogToTrace()

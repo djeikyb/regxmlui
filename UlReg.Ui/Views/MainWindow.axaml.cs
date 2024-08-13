@@ -1,7 +1,7 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
-using CommunityToolkit.Mvvm.Input;
+using R3;
 
 namespace UlReg.Views;
 
@@ -18,7 +18,7 @@ public partial class MainWindow : Window
         KeyBindings.Add(new KeyBinding
         {
             Gesture = new KeyGesture(Key.A, KeyModifiers.Control | KeyModifiers.Shift),
-            Command = new RelayCommand(() =>
+            Command = new ReactiveCommand<Unit>(_ =>
             {
                 if (Application.Current is App application)
                 {
