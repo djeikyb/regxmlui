@@ -8,26 +8,6 @@
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="740"
              x:Class="UlReg.Views.MainView"
              x:CompileBindings="True" x:DataType="vm:MainViewModel">
-  <Design.DataContext>
-    <vm:MainViewModel>
-      <vm:MainViewModel.Entries>
-        <objectModel:ObservableCollection x:TypeArguments="vm:RegisterEntryViewModel">
-          <vm:RegisterEntryViewModel Register="groups" Symbol="some sym" DefiningDocument="smp 666"
-                                     Ul="deadbeef.beefcace.feedface.d00d2bad" />
-          <vm:RegisterEntryViewModel Register="groups" Symbol="some sym" DefiningDocument="smp 666"
-                                     Ul="deadbeef.beefcace.feedface.d00d2bad" />
-          <vm:RegisterEntryViewModel Register="groups" Symbol="some sym" DefiningDocument="smp 666"
-                                     Ul="deadbeef.beefcace.feedface.d00d2bad" />
-          <!--         <vm:RegisterEntryViewModel Register="groups" Symbol="some sym" DefiningDocument="smp 666" -->
-          <!--                                    Ul="deadbeef.beefcace.feedface.d00d2bad" /> -->
-          <!--         <vm:RegisterEntryViewModel Register="groups" Symbol="some sym" DefiningDocument="smp 666" -->
-          <!--                                    Ul="deadbeef.beefcace.feedface.d00d2bad" /> -->
-          <!--         <vm:RegisterEntryViewModel Register="groups" Symbol="some sym" DefiningDocument="smp 666" -->
-          <!--                                    Ul="deadbeef.beefcace.feedface.d00d2bad" /> -->
-        </objectModel:ObservableCollection>
-      </vm:MainViewModel.Entries>
-    </vm:MainViewModel>
-  </Design.DataContext>
   <DockPanel>
     <Grid DockPanel.Dock="Top"
           Margin="9 0 9 9">

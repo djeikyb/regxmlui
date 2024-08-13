@@ -22,9 +22,6 @@
         FontSize="13"
         x:Name="Main"
         x:CompileBindings="True" x:DataType="vm:MainViewModel">
-  <Design.DataContext>
-    <vm:MainViewModel />
-  </Design.DataContext>
   <Panel>
     <ExperimentalAcrylicBorder Name="AcrylicBorder"
                                IsHitTestVisible="False"
