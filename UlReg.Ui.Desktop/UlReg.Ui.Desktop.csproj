@@ -38,4 +38,43 @@
     <ProjectReference Include="..\UlReg.Ui\UlReg.Ui.csproj" />
   </ItemGroup>
 
+  <Target BeforeTargets="Publish" Name="asdf">
+    <Message Text="oop there we go aagi= $(MSBuildProjectFile)" Importance="high" />
+    <Message Text="$(AssemblyName)" Importance="high" />
+    <Message Text="$(RootNamespace)" Importance="high" />
+    <Message Text="$(PublishDir)" Importance="high" />
+  </Target>
+
+  <PropertyGroup>
+    <MacosBundleName>Universal Labels.app</MacosBundleName>
+  </PropertyGroup>
+
+
+  <Target DependsOnTargets="PublishItemsOutputGroup" AfterTargets="PublishItemsOutputGroup" Name="asdf">
+    <ItemGroup>
+      <LibsAndExe Include="$(PublishDir)*.dylib;$(PublishDir)$(AssemblyName)" />
+    </ItemGroup>
+    <Message Text="oop there we go aagi= $(MSBuildProjectFile)" Importance="high" />
+    <Message Text="$(AssemblyName)" Importance="high" />
+    <Message Text="$(RootNamespace)" Importance="high" />
+    <Message Text="publish dir: $(PublishDir)" Importance="high" />
+    <RemoveDir Directories="$(ArtifactsPath)/$(MacosBundleName)" />
+<!--    <MakeDir Directories="$(ArtifactsPath)/$(MacosBundleName)/Contents/MacOS"/>-->
+<!--    <MakeDir Directories="$(ArtifactsPath)/$(MacosBundleName)/Contents/Resources"/>-->
+    <Message Text="copying plist" Importance="high" />
+    <Copy SourceFiles="$(ProjectDir)/Info.plist" DestinationFolder="$(ArtifactsPath)/$(MacosBundleName)/Contents"/>
+    <Message Text="copying icons" Importance="high" />
+    <Copy SourceFiles="$(ProjectDir)/icon.icns" DestinationFolder="$(ArtifactsPath)/$(MacosBundleName)/Contents/Resources"/>
+    <Message Text="copying dylib and exe: @(LibsAndExe)" Importance="high" />
+    <Message Text="                   to: $(ArtifactsPath)/$(MacosBundleName)/Contents/MacOS" Importance="high" />
+    <Copy UseHardlinksIfPossible="true" SourceFiles="@(LibsAndExe)" DestinationFolder="$(ArtifactsPath)/$(MacosBundleName)/Contents/MacOS"/>
+    <Message Text="now tree" Importance="high" />
+    <Hash ItemsToHash="@(LibsAndExe)" HashResult="LibsAndExeHashes" />
+    <Message Text="@(LibsAndExeHashes)" Importance="high" />
+    <Exec Command="tree --du -h '$(ArtifactsPath)/$(MacosBundleName)/'" >
+      <Output TaskParameter="ConsoleOutput" PropertyName="dunno" />
+    </Exec>
+  </Target>
+
+
 </Project>
