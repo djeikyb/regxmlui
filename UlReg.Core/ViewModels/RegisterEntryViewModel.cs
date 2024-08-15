@@ -5,7 +5,7 @@ namespace UlReg.ViewModels;
 public class RegisterEntryViewModel(RegisterEntry re)
 {
     public string? Ul { get; } = re.Ul.ToOctets();
-    public string? Register { get; } = re.Register;
-    public string? DefiningDocument { get; } = re.DefiningDocument;
-    public string? Symbol { get; } = re.Symbol;
+    public string Register => re.Register;
+    public string? DefiningDocument => re.DefiningDocument;
+    public string Symbol => re.Symbol;
 }
