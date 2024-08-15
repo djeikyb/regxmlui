@@ -87,6 +87,11 @@ public class RegXmlService : IRegisterService
                 chain = chain.Or(re => re.Symbol.Contains(term, StringComparison.InvariantCultureIgnoreCase));
             }
 
+            if (term is { Length: >= 3 })
+            {
+                chain = chain.Or(re => re.DefiningDocument != null && re.DefiningDocument.Contains(term, StringComparison.InvariantCultureIgnoreCase));
+            }
+
             q = q.Where(chain);
         }
 
