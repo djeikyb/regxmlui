@@ -90,7 +90,7 @@ public partial class MainViewModel : IDisposable
                             return fn;
                         },
                         v => v)
-                    .Select(g => g.Last())
+                    .Select(g => g.OrderBy(x => Regex.Match(x, @"-20\d\d.pdf$").Value).Last())
                     .Select(x => $"file://{x}")
                     .ToList();
 
