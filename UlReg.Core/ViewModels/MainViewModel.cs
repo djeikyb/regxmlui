@@ -84,6 +84,7 @@ public partial class MainViewModel : IDisposable
                         k =>
                         {
                             var fn = Path.GetFileName(k);
+                            fn = Regex.Replace(fn, @"^Version_", string.Empty);
                             fn = Regex.Replace(fn, @"^st0", "st");
                             fn = Regex.Replace(fn, @"-20\d\d.pdf", "-20xx.pdf"); // TOneverDO century bug
                             return fn;
