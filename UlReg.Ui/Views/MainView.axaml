@@ -65,6 +65,7 @@
     </TextBlock>
 
     <DataGrid ItemsSource="{Binding Entries}"
+              Name="DataGrid"
               Margin="9 9 9 9"
               VerticalScrollBarVisibility="Visible"
               CanUserSortColumns="True"
@@ -83,10 +84,19 @@
                             Width="280"
                             Binding="{Binding Symbol}">
         </DataGridTextColumn>
-        <DataGridTextColumn Header="Document"
-                            Width="200"
-                            Binding="{Binding DefiningDocument}">
-        </DataGridTextColumn>
+        <DataGridTemplateColumn Header="Document"
+                            Width="200" >
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <TextBlock
+                VerticalAlignment="Center"
+                Padding="12 0 0 0 "
+                Margin="0 0 0 0"
+                Text="{Binding DefiningDocument}">
+              </TextBlock>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
         <DataGridTextColumn Header="UL"
                             Width="324"
                             Binding="{Binding Ul}">
