@@ -3,7 +3,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:UlReg.ViewModels;assembly=UlReg.Core"
-             xmlns:objectModel="clr-namespace:System.Collections.ObjectModel;assembly=System.ObjectModel"
              FontFamily="avares://Avalonia.Fonts.Inter/Assets#Inter"
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="740"
              x:Class="UlReg.Views.MainView"
@@ -61,7 +60,7 @@
     <TextBlock DockPanel.Dock="Top"
                Margin="9 9 9 0">
       <Run Text="Total:" />
-      <Run Text="{Binding EntriesView.Count}"></Run>
+      <Run Text="{Binding EntriesView.Count}" />
     </TextBlock>
 
 
@@ -87,25 +86,22 @@
         <DataGridTextColumn Header="Register" Binding="{Binding Register}" />
         <DataGridTextColumn Header="Symbol"
                             Width="280"
-                            Binding="{Binding Symbol}">
-        </DataGridTextColumn>
+                            Binding="{Binding Symbol}" />
         <DataGridTemplateColumn Header="Document"
-                            Width="200" >
+                                Width="200" >
           <DataGridTemplateColumn.CellTemplate>
             <DataTemplate>
               <TextBlock
                 VerticalAlignment="Center"
                 Padding="12 0 0 0 "
                 Margin="0 0 0 0"
-                Text="{Binding DefiningDocument}">
-              </TextBlock>
+                Text="{Binding DefiningDocument}" />
             </DataTemplate>
           </DataGridTemplateColumn.CellTemplate>
         </DataGridTemplateColumn>
         <DataGridTextColumn Header="UL"
                             Width="324"
-                            Binding="{Binding Ul}">
-        </DataGridTextColumn>
+                            Binding="{Binding Ul}" />
       </DataGrid.Columns>
     </DataGrid>
   </DockPanel>

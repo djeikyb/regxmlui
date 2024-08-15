@@ -56,62 +56,53 @@ public partial class MainViewModel : IDisposable
         OpenDefiningDocument = new();
         OpenDefiningDocument.Subscribe(maybeDoc =>
         {
+            var parsed = ParseDefiningDocumentField(maybeDoc);
+            if (parsed is null) return;
+            var (cat, num) = parsed.Value;
+            Console.WriteLine($"📂 will try to open: {cat} {num}");
 
-                var parsed = ParseDefiningDocumentField(maybeDoc);
-                if (parsed is null) return;
-                var (cat, num) = parsed.Value;
-                Console.WriteLine($"📂 will try to open: {cat} {num}");
-
-                var location = $"/Users/jacob/www/smpte/pub.smpte.org/pub.smpte.org/doc/{cat}{num}";
-                var files = Directory.EnumerateFiles(location, "*.pdf",
-                        new EnumerationOptions
-                        {
-                            RecurseSubdirectories = true,
-                            MatchCasing = MatchCasing.CaseInsensitive,
-                            MatchType = MatchType.Simple,
-                        })
-                    .Where(pdf =>
+            var location = $"/Users/jacob/www/smpte/pub.smpte.org/pub.smpte.org/doc/{cat}{num}";
+            var files = Directory.EnumerateFiles(location, "*.pdf",
+                    new EnumerationOptions
                     {
-                        // if the regxml defining document says "amendment"
-                        // then go ahead and include amendment pdfs
-                        // but otherwise
-                        // they're just cluttering up the result space
-                        // so exclude 'em
-                        if (pdf.Contains("-am") && !maybeDoc.Contains("amendment")) return false;
-                        return true;
+                        RecurseSubdirectories = true,
+                        MatchCasing = MatchCasing.CaseInsensitive,
+                        MatchType = MatchType.Simple,
                     })
-                    .GroupBy(
-                        k =>
-                        {
-                            var fn = Path.GetFileName(k);
-                            fn = Regex.Replace(fn, @"^Version_", string.Empty);
-                            fn = Regex.Replace(fn, @"^st0", "st");
-                            fn = Regex.Replace(fn, @"-20\d\d.pdf", "-20xx.pdf"); // TOneverDO century bug
-                            return fn;
-                        },
-                        v => v)
-                    .Select(g => g.OrderBy(x => Regex.Match(x, @"-20\d\d.pdf$").Value).Last())
-                    .Select(x => $"file://{x}")
-                    .ToList();
-
-                if (files.Count == 1)
+                .Where(pdf =>
                 {
-                    using var _ = Process.Start(new ProcessStartInfo("open", files[0]) { UseShellExecute = true });
-                }
-                else
-                {
-                    using var _ = Process.Start(new ProcessStartInfo(location) { UseShellExecute = true });
-                }
+                    // if the regxml defining document says "amendment"
+                    // then go ahead and include amendment pdfs
+                    // but otherwise
+                    // they're just cluttering up the result space
+                    // so exclude 'em
+                    if (pdf.Contains("-am") && !maybeDoc.Contains("amendment")) return false;
+                    return true;
+                })
+                .GroupBy(
+                    k =>
+                    {
+                        var fn = Path.GetFileName(k);
+                        fn = Regex.Replace(fn, @"^Version_", string.Empty);
+                        fn = Regex.Replace(fn, @"^st0", "st");
+                        fn = Regex.Replace(fn, @"-20\d\d.pdf", "-20xx.pdf"); // TOneverDO century bug
+                        return fn;
+                    },
+                    v => v)
+                .Select(g => g.OrderBy(x => Regex.Match(x, @"-20\d\d.pdf$").Value).Last())
+                .Select(x => $"file://{x}")
+                .ToList();
 
-                Console.WriteLine($"\tfound:\n{string.Join('\n', files.Select(x => $"\t\t{x}"))}");
+            if (files.Count == 1)
+            {
+                using var _ = Process.Start(new ProcessStartInfo("open", files[0]) { UseShellExecute = true });
+            }
+            else
+            {
+                using var _ = Process.Start(new ProcessStartInfo(location) { UseShellExecute = true });
+            }
 
-                // if (maybeDoc != null && maybeDoc.StartsWith("SMPTE"))
-                // {
-                //     var r = new Regex(".*SMPTE ?(?:number.*) ?.*$",
-                //         RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
-                //     var location = "/Users/jacob/www/smpte/pub.smpte.org/pub.smpte.org/doc";
-                //     Directory.EnumerateFiles(location, "**.pdf", SearchOption.AllDirectories);
-                // }
+            Console.WriteLine($"\tfound:\n{string.Join('\n', files.Select(x => $"\t\t{x}"))}");
         });
     }
 

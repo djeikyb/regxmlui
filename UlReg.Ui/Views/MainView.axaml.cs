@@ -1,5 +1,3 @@
-using System.Diagnostics;
-using System.Text.RegularExpressions;
 using Avalonia.Controls;
 using Avalonia.Input;
 using R3;
