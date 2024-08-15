@@ -64,14 +64,19 @@
       <Run Text="{Binding EntriesView.Count}"></Run>
     </TextBlock>
 
+
     <DataGrid ItemsSource="{Binding EntriesView}"
               Name="DataGrid"
+              ClipboardCopyMode="None"
               Margin="9 9 9 9"
               VerticalScrollBarVisibility="Visible"
               CanUserSortColumns="True"
+              CanUserReorderColumns="False"
               CanUserResizeColumns="True"
               GridLinesVisibility="All"
               BorderThickness="1" BorderBrush="Gray"
+              SelectedIndex="{Binding SelectedRowIndex.Value}"
+              SelectionMode="Single"
               IsReadOnly="True">
       <DataGrid.Styles>
         <Style Selector="DataGridCell">

@@ -1,6 +1,7 @@
 using ObservableCollections;
 using R3;
 using RegXml;
+using UlReg.Model.Services;
 using UlRegBiz.Model.Services;
 using UlRegBiz.Services;
 
@@ -11,7 +12,7 @@ public class MainViewModel : IDisposable
     private readonly IRegisterService _register;
     private readonly ObservableList<RegisterEntryViewModel> _entries;
 
-    public MainViewModel()
+    public MainViewModel(IApplicationService appService)
     {
         Topmost = new(false);
 
@@ -39,6 +40,17 @@ public class MainViewModel : IDisposable
             .Merge(SearchTerm, SearchUl0, SearchUl4, SearchUl8, SearchUl12)
             .Debounce(TimeSpan.FromMilliseconds(200))
             .Subscribe(_ => RefreshTable());
+
+        SelectedRowIndex = new();
+        CopyCommand = new();
+        CopyCommand.Subscribe(_ =>
+        {
+            Console.WriteLine($"🍝 copyCOPYcopy {SelectedRowIndex}");
+            var v = EntriesView as IList<RegisterEntryViewModel>;
+            if (v is null) return;
+            var item = v[SelectedRowIndex.Value];
+            if (item.Ul is not null) appService.SetClipboardText(item.Ul);
+        });
     }
 
     public BindableReactiveProperty<string?> SearchTerm { get; }
@@ -48,6 +60,8 @@ public class MainViewModel : IDisposable
     public BindableReactiveProperty<string?> SearchUl8 { get; }
     public BindableReactiveProperty<string?> SearchUl12 { get; }
     public INotifyCollectionChangedSynchronizedView<RegisterEntryViewModel> EntriesView { get; }
+    public BindableReactiveProperty<int> SelectedRowIndex { get; }
+    public ReactiveCommand<Unit> CopyCommand { get; }
 
     internal void RefreshTable()
     {

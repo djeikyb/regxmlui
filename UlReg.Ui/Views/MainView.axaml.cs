@@ -1,8 +1,7 @@
 using System.Diagnostics;
 using System.Text.RegularExpressions;
-using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Data;
+using Avalonia.Input;
 using R3;
 using UlReg.ViewModels;
 
@@ -21,6 +20,26 @@ public partial class MainView : UserControl
         //     var binding = new Binding { Source = vm.SearchTerm, Path = nameof(vm.SearchTerm.Value) };
         //     InputSearchTerm.Bind(TextBlock.TextProperty, binding);
         // };
+
+        Observable
+            .FromEvent<EventHandler<KeyEventArgs>, KeyEventArgs>(
+                h => (sender, e) => h(e),
+                e => DataGrid.KeyDown += e,
+                e => DataGrid.KeyDown -= e)
+            .Where(e =>
+            {
+                var hotkeys = TopLevel.GetTopLevel(this)?.PlatformSettings?.HotkeyConfiguration;
+                return hotkeys is not null && hotkeys.Copy.Any(g => g.Matches(e));
+            })
+            .Subscribe(e =>
+            {
+                Console.WriteLine($"⚡️ {nameof(DataGrid.KeyDown)}");
+                var vm = (MainViewModel?)DataContext;
+                if (vm == null) return;
+                vm.CopyCommand.Execute(new Unit());
+                e.Handled = true;
+            });
+
 
         Observable
             .FromEvent<EventHandler<DataGridCellPointerPressedEventArgs>, DataGridCellPointerPressedEventArgs>(
