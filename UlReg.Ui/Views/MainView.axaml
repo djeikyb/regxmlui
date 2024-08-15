@@ -61,10 +61,10 @@
     <TextBlock DockPanel.Dock="Top"
                Margin="9 9 9 0">
       <Run Text="Total:" />
-      <Run Text="{Binding Entries.Count}"></Run>
+      <Run Text="{Binding EntriesView.Count}"></Run>
     </TextBlock>
 
-    <DataGrid ItemsSource="{Binding Entries}"
+    <DataGrid ItemsSource="{Binding EntriesView}"
               Name="DataGrid"
               Margin="9 9 9 9"
               VerticalScrollBarVisibility="Visible"

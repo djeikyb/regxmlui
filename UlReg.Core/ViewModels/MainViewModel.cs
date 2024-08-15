@@ -1,4 +1,4 @@
-using System.Collections.ObjectModel;
+using ObservableCollections;
 using R3;
 using RegXml;
 using UlRegBiz.Model.Services;
@@ -9,6 +9,7 @@ namespace UlReg.ViewModels;
 public class MainViewModel : IDisposable
 {
     private readonly IRegisterService _register;
+    private readonly ObservableList<RegisterEntryViewModel> _entries;
 
     public MainViewModel()
     {
@@ -23,9 +24,10 @@ public class MainViewModel : IDisposable
             new RegXmlService(registers.Types.Xml)
         );
 
-        Entries = new ObservableCollection<RegisterEntryViewModel>(
+        _entries = new ObservableList<RegisterEntryViewModel>(
             _register.All().Select(re => new RegisterEntryViewModel(re))
         );
+        EntriesView = _entries.CreateView(x => x).ToNotifyCollectionChanged();
 
         SearchTerm = new BindableReactiveProperty<string?>(string.Empty);
         SearchUl0 = new();
@@ -45,11 +47,11 @@ public class MainViewModel : IDisposable
     public BindableReactiveProperty<string?> SearchUl4 { get; }
     public BindableReactiveProperty<string?> SearchUl8 { get; }
     public BindableReactiveProperty<string?> SearchUl12 { get; }
-    public ObservableCollection<RegisterEntryViewModel> Entries { get; init; }
+    public INotifyCollectionChangedSynchronizedView<RegisterEntryViewModel> EntriesView { get; }
 
     internal void RefreshTable()
     {
-        Entries.Clear();
+        _entries.Clear();
 
         if (SearchUl0.Value is not { Length: > 0 }
             && SearchUl4.Value is not { Length: > 0 }
@@ -57,18 +59,16 @@ public class MainViewModel : IDisposable
             && SearchUl12.Value is not { Length: > 0 }
             && SearchTerm.Value is not { Length: > 2 })
         {
-            foreach (var re in _register.All()) Entries.Add(new RegisterEntryViewModel(re));
+            _entries.AddRange(_register.All().Select(re => new RegisterEntryViewModel(re)));
         }
         else
         {
-            foreach (var vm in _register.Search(
-                             SearchTerm.Value,
-                             SearchUl0.Value, SearchUl4.Value,
-                             SearchUl8.Value, SearchUl12.Value)
-                         .Select(re => new RegisterEntryViewModel(re)))
-            {
-                Entries.Add(vm);
-            }
+            _entries.AddRange(
+                _register.Search(
+                        SearchTerm.Value,
+                        SearchUl0.Value, SearchUl4.Value,
+                        SearchUl8.Value, SearchUl12.Value)
+                    .Select(re => new RegisterEntryViewModel(re)));
         }
     }
 

@@ -10,6 +10,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All"/>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="$(MicrosoftExtensionsDependencyInjectionVersion)"/>
+    <PackageReference Include="ObservableCollections.R3" Version="2.2.0" />
     <PackageReference Include="R3" Version="1.1.11" />
   </ItemGroup>
 
