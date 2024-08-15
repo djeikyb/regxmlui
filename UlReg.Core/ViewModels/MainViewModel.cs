@@ -145,7 +145,7 @@ public partial class MainViewModel : IDisposable
         if ("377M-1".Equals(defdoc)) return ("ST", "377-1");
         if ("SMPTE 377M".Equals(defdoc)) return ("ST", "377-1");
         if ("SMPTE 377M-1".Equals(defdoc)) return ("ST", "377-1");
-        var m = SmpteDocNameBasic().Match(defdoc);
+        var m = RegexDefiningDocParserBasic().Match(defdoc);
 
         if (m.Groups["cat"].Captures.Count > 1)
         {
@@ -192,7 +192,7 @@ public partial class MainViewModel : IDisposable
         options: RegexOptions.IgnoreCase,
         cultureName: "en-US"
     )]
-    private static partial Regex SmpteDocNameBasic();
+    private static partial Regex RegexDefiningDocParserBasic();
 
     [GeneratedRegex(
         pattern:
