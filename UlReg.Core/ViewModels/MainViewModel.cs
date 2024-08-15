@@ -54,9 +54,9 @@ public partial class MainViewModel : IDisposable
             if (item.Ul is not null) appService.SetClipboardText(item.Ul);
         });
         OpenDefiningDocument = new();
-        OpenDefiningDocument.Subscribe(maybeDoc =>
+        OpenDefiningDocument.Subscribe(defDoc =>
         {
-            var parsed = ParseDefiningDocumentField(maybeDoc);
+            var parsed = ParseDefiningDocumentField(defDoc);
             if (parsed is null) return;
             var (cat, num) = parsed.Value;
             Console.WriteLine($"📂 will try to open: {cat} {num}");
@@ -76,7 +76,7 @@ public partial class MainViewModel : IDisposable
                     // but otherwise
                     // they're just cluttering up the result space
                     // so exclude 'em
-                    if (pdf.Contains("-am") && !maybeDoc.Contains("amendment")) return false;
+                    if (pdf.Contains("-am") && !defDoc.Contains("amendment")) return false;
                     return true;
                 })
                 .GroupBy(
