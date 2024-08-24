@@ -68,7 +68,19 @@
       Padding="0 0 0 0"
       Source="{Binding Source.Value}"
       Background="#ffffff"
-      Name="MyTreeDataGrid" />
+      Name="MyTreeDataGrid">
+      <TreeDataGrid.Styles>
+        <Style Selector="TreeDataGridRow">
+          <Setter Property="Height" Value="20"/>
+        </Style>
+        <Style Selector="TreeDataGridRow:nth-child(even)">
+          <Setter Property="Background" Value="#f4f5f5" />
+        </Style>
+        <Style Selector="TreeDataGridColumnHeader:nth-child(4), TreeDataGridRow  TreeDataGridTextCell:nth-child(4)">
+          <Setter Property="TextElement.Foreground" Value="#837f80"/>
+        </Style>
+      </TreeDataGrid.Styles>
+    </TreeDataGrid>
 
   </DockPanel>
 </UserControl>

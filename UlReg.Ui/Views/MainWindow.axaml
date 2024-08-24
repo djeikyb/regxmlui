@@ -7,7 +7,7 @@
         mc:Ignorable="d" d:DesignWidth="450" d:DesignHeight="740"
         x:Class="UlReg.Views.MainWindow"
         Title="Universal Labels"
-        Background="{x:Null}"
+        Background="#dee1e1"
         TransparencyLevelHint="AcrylicBlur"
         ExtendClientAreaToDecorationsHint="True"
         ExtendClientAreaChromeHints="PreferSystemChrome"
