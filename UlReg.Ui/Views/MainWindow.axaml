@@ -22,7 +22,7 @@
         FontFamily="SF Pro"
         FontSize="12"
         x:Name="Main"
-        x:CompileBindings="True" x:DataType="vm:MainViewModel">
+        x:CompileBindings="True" x:DataType="views:Shim">
   <Panel>
     <ExperimentalAcrylicBorder Name="AcrylicBorder"
                                IsHitTestVisible="False"

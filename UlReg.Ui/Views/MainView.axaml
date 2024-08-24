@@ -3,9 +3,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:UlReg.ViewModels;assembly=UlReg.Core"
+             xmlns:views="clr-namespace:UlReg.Views"
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="740"
              x:Class="UlReg.Views.MainView"
-             x:CompileBindings="True" x:DataType="vm:MainViewModel">
+             x:CompileBindings="True" x:DataType="views:Shim">
   <DockPanel>
     <Grid DockPanel.Dock="Top"
           Margin="9 0 9 9">
@@ -62,46 +63,12 @@
       <Run Text="{Binding EntriesView.Count}" />
     </TextBlock>
 
+    <TreeDataGrid
+      Margin="0 9 0 0"
+      Padding="0 0 0 0"
+      Source="{Binding Source.Value}"
+      Background="#ffffff"
+      Name="MyTreeDataGrid" />
 
-    <DataGrid ItemsSource="{Binding EntriesView}"
-              Name="DataGrid"
-              ClipboardCopyMode="None"
-              Margin="9 9 9 9"
-              VerticalScrollBarVisibility="Visible"
-              CanUserSortColumns="True"
-              CanUserReorderColumns="False"
-              CanUserResizeColumns="True"
-              GridLinesVisibility="All"
-              BorderThickness="1" BorderBrush="Gray"
-              SelectedIndex="{Binding SelectedRowIndex.Value}"
-              SelectionMode="Single"
-              IsReadOnly="True">
-      <DataGrid.Styles>
-        <Style Selector="DataGridCell">
-          <Setter Property="FontSize" Value="13"/>
-        </Style>
-      </DataGrid.Styles>
-      <DataGrid.Columns>
-        <DataGridTextColumn Header="Register" Binding="{Binding Register}" />
-        <DataGridTextColumn Header="Symbol"
-                            Width="280"
-                            Binding="{Binding Symbol}" />
-        <DataGridTemplateColumn Header="Document"
-                                Width="200" >
-          <DataGridTemplateColumn.CellTemplate>
-            <DataTemplate>
-              <TextBlock
-                VerticalAlignment="Center"
-                Padding="12 0 0 0 "
-                Margin="0 0 0 0"
-                Text="{Binding DefiningDocument}" />
-            </DataTemplate>
-          </DataGridTemplateColumn.CellTemplate>
-        </DataGridTemplateColumn>
-        <DataGridTextColumn Header="UL"
-                            Width="324"
-                            Binding="{Binding Ul}" />
-      </DataGrid.Columns>
-    </DataGrid>
   </DockPanel>
 </UserControl>

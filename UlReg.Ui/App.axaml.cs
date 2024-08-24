@@ -22,7 +22,7 @@ public class App : Application
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             var mainWindow = new MainWindow();
-            mainWindow.DataContext = new MainViewModel(new ApplicationService(mainWindow));
+            mainWindow.DataContext = new Shim(new ApplicationService(mainWindow));
             desktop.MainWindow = mainWindow;
         }
         else
