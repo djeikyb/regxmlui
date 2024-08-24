@@ -8,8 +8,9 @@
              x:Class="UlReg.Views.MainView"
              x:CompileBindings="True" x:DataType="views:Shim">
   <DockPanel>
+
     <Grid DockPanel.Dock="Top"
-          Margin="9 0 9 9">
+          Margin="9 0 9 12">
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="*" />
         <ColumnDefinition Width="auto" />
@@ -57,14 +58,30 @@
 
     </Grid>
 
-    <TextBlock DockPanel.Dock="Top"
-               Margin="9 9 9 0">
-      <Run Text="Total:" />
-      <Run Text="{Binding EntriesView.Count}" />
-    </TextBlock>
+    <Rectangle HorizontalAlignment="Stretch"
+               Fill="#d9d9d9"
+               Height="1"
+               Margin="0 0 0 0"
+               DockPanel.Dock="Top" />
+
+    <StackPanel Background="#f1f4f4"
+                DockPanel.Dock="Bottom">
+      <Rectangle HorizontalAlignment="Stretch"
+                 Fill="#e5e7e7"
+                 Height="0.5"
+                 Margin="0 0 0 0" />
+      <Rectangle HorizontalAlignment="Stretch"
+                 Fill="#cbcece"
+                 Height="0.5"
+                 Margin="0 0 0 0" />
+      <TextBlock Foreground="#737575" HorizontalAlignment="Left" Padding="6">
+        <Run Text="Total:" />
+        <Run Text="{Binding EntriesView.Count}" />
+      </TextBlock>
+    </StackPanel>
 
     <TreeDataGrid
-      Margin="0 9 0 0"
+      Margin="0 0 0 0"
       Padding="0 0 0 0"
       Source="{Binding Source.Value}"
       Background="#ffffff"
