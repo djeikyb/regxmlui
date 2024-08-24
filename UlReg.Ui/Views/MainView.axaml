@@ -3,7 +3,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:UlReg.ViewModels;assembly=UlReg.Core"
-             FontFamily="avares://Avalonia.Fonts.Inter/Assets#Inter"
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="740"
              x:Class="UlReg.Views.MainView"
              x:CompileBindings="True" x:DataType="vm:MainViewModel">
