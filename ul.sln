@@ -17,7 +17,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{43CE59DA
 		global.json = global.json
 		.gitignore = .gitignore
 		.editorconfig = .editorconfig
-		pack.sh = pack.sh
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegXml", "RegXml\RegXml.csproj", "{8F865D6E-E32E-4DB2-9AFE-54CA5C687A77}"

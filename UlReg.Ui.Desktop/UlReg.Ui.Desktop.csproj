@@ -50,7 +50,7 @@
   </PropertyGroup>
 
 
-  <Target DependsOnTargets="PublishItemsOutputGroup" AfterTargets="PublishItemsOutputGroup" Name="asdf">
+  <Target DependsOnTargets="_CopyAotSymbols" AfterTargets="_CopyAotSymbols" Name="BundleMacosApp">
     <ItemGroup>
       <LibsAndExe Include="$(PublishDir)*.dylib;$(PublishDir)$(AssemblyName)" />
     </ItemGroup>
