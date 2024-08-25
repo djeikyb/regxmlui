@@ -16,4 +16,7 @@
   <Style Selector="TextBox TextPresenter#PART_TextPresenter">
     <Setter Property="VerticalAlignment" Value="Center" />
   </Style>
+  <Style Selector=".status-bar TextElement">
+    <Setter Property="Foreground" Value="#737575" />
+  </Style>
 </Styles>

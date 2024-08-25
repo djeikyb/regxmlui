@@ -65,6 +65,7 @@
                DockPanel.Dock="Top" />
 
     <StackPanel Background="#f1f4f4"
+                Orientation="Horizontal"
                 DockPanel.Dock="Bottom">
       <Rectangle HorizontalAlignment="Stretch"
                  Fill="#e5e7e7"
@@ -74,9 +75,13 @@
                  Fill="#cbcece"
                  Height="0.5"
                  Margin="0 0 0 0" />
-      <TextBlock Foreground="#737575" HorizontalAlignment="Left" Padding="6">
+      <TextBlock HorizontalAlignment="Left" Padding="6">
         <Run Text="Total:" />
         <Run Text="{Binding EntriesView.Count}" />
+      </TextBlock>
+      <TextBlock Padding="6">
+        <Run Text="Selected:" />
+        <Run Text="{Binding SelectedRowsCount.Value, Mode=OneWay}"/>
       </TextBlock>
     </StackPanel>
 

@@ -21,7 +21,16 @@ public class Shim : MainViewModel
                 new TextColumn<RegisterEntryViewModel, string>("UL", x => x.Ul, new GridLength(324, GridUnitType.Auto)),
             },
         };
+        Source.Value.RowSelection!.SingleSelect = false;
+
+        SelectedRowsCount = new(0);
+
+        SelectedRowsCount = Source.Value.RowSelection
+            .ObservePropertyChanged(x => x.Count)
+            .ToBindableReactiveProperty();
     }
 
-    public BindableReactiveProperty<ITreeDataGridSource<RegisterEntryViewModel>?> Source { get; }
+
+    public BindableReactiveProperty<FlatTreeDataGridSource<RegisterEntryViewModel>?> Source { get; }
+    public BindableReactiveProperty<int> SelectedRowsCount { get; }
 }
