@@ -90,6 +90,7 @@
       Padding="0 0 0 0"
       Source="{Binding Source.Value}"
       Background="#ffffff"
+
       Name="MyTreeDataGrid">
       <TreeDataGrid.Styles>
         <Style Selector="TreeDataGridRow">
@@ -100,6 +101,7 @@
         </Style>
         <Style Selector="TreeDataGridColumnHeader:nth-child(4), TreeDataGridRow  TreeDataGridTextCell:nth-child(4)">
           <Setter Property="TextElement.Foreground" Value="#837f80"/>
+          <Setter Property="TextElement.FontFamily" Value="SF Mono" />
         </Style>
       </TreeDataGrid.Styles>
     </TreeDataGrid>
