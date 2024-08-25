@@ -1,6 +1,6 @@
 using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
 using Avalonia.Input;
-using R3;
 using UlReg.ViewModels;
 
 namespace UlReg.Views;
@@ -19,45 +19,36 @@ public partial class MainView : UserControl
         //     InputSearchTerm.Bind(TextBlock.TextProperty, binding);
         // };
 
-        // Observable
-        //     .FromEvent<EventHandler<KeyEventArgs>, KeyEventArgs>(
-        //         h => (sender, e) => h(e),
-        //         e => DataGrid.KeyDown += e,
-        //         e => DataGrid.KeyDown -= e)
-        //     .Where(e =>
-        //     {
-        //         var hotkeys = TopLevel.GetTopLevel(this)?.PlatformSettings?.HotkeyConfiguration;
-        //         return hotkeys is not null && hotkeys.Copy.Any(g => g.Matches(e));
-        //     })
-        //     .Subscribe(e =>
-        //     {
-        //         Console.WriteLine($"⚡️ {nameof(DataGrid.KeyDown)}");
-        //         var vm = (MainViewModel?)DataContext;
-        //         if (vm == null) return;
-        //         vm.CopyCommand.Execute(new Unit());
-        //         e.Handled = true;
-        //     });
-        //
-        //
-        // Observable
-        //     .FromEvent<EventHandler<DataGridCellPointerPressedEventArgs>, DataGridCellPointerPressedEventArgs>(
-        //         h => (sender, e) => h(e),
-        //         e => DataGrid.CellPointerPressed += e,
-        //         e => DataGrid.CellPointerPressed -= e)
-        //     .Where(e => e.Column.DisplayIndex == 2)
-        //     .Where(e => e.PointerPressedEventArgs.ClickCount == 2)
-        //     .Subscribe(e =>
-        //     {
-        //         Console.WriteLine($"⚡️ double-clicked a doc (column index 2)!");
-        //
-        //         var vm = (MainViewModel?)DataContext;
-        //         if (vm == null) return;
-        //
-        //         var tb = (TextBlock?)e.Cell.Content;
-        //         var maybeDoc = tb?.Text;
-        //         if (maybeDoc is null) return;
-        //
-        //         vm.OpenDefiningDocument.Execute(maybeDoc);
-        //     });
+        MyTreeDataGrid.KeyDown += (sender, e) =>
+        {
+            // only pay attention to platform copy key-bindings
+            var hotkeys = TopLevel.GetTopLevel(this)?.PlatformSettings?.HotkeyConfiguration;
+            if (hotkeys is null || !hotkeys.Copy.Any(g => g.Matches(e))) return;
+
+            // handle copy
+            Console.WriteLine($"⚡️ {nameof(MyTreeDataGrid)} copy!");
+            var tdg = (TreeDataGrid)sender!;
+            if (tdg.RowSelection is not { SelectedItem: { } row }) return;
+            if (row is not RegisterEntryViewModel re) return;
+            var vm = (MainViewModel?)DataContext;
+            if (vm == null) return;
+            vm.CopyCommand.Execute(re);
+            e.Handled = true;
+        };
+
+        MyTreeDataGrid.DoubleTapped += (sender, e) =>
+        {
+            var tdg = (TreeDataGrid)sender!;
+            var found = tdg.GetInputElementsAt(e.GetPosition(tdg));
+            var cells = (TreeDataGridCellsPresenter?)found.FirstOrDefault(ie => ie is TreeDataGridCellsPresenter);
+
+            // ignore if it wasn't a row that wasn't tapped
+            // iunno. maybe it was a column divider?
+            if (cells is null) return;
+
+            Console.WriteLine($"⚡️ double-tapped a row!");
+            var vm = (MainViewModel)tdg.DataContext!;
+            vm.OpenDefiningDocument.Execute((RegisterEntryViewModel)cells.DataContext!);
+        };
     }
 }

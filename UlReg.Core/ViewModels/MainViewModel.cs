@@ -45,17 +45,16 @@ public partial class MainViewModel : IDisposable
 
         SelectedRowIndex = new();
         CopyCommand = new();
-        CopyCommand.Subscribe(_ =>
+        CopyCommand.Subscribe(re =>
         {
-            Console.WriteLine($"🍝 copyCOPYcopy {SelectedRowIndex}");
-            var v = EntriesView as IList<RegisterEntryViewModel>;
-            if (v is null) return;
-            var item = v[SelectedRowIndex.Value];
-            if (item.Ul is not null) appService.SetClipboardText(item.Ul);
+            Console.WriteLine($"🍝 copyCOPYcopy");
+            if (re.Ul is null) return;
+            appService.SetClipboardText(re.Ul);
         });
         OpenDefiningDocument = new();
-        OpenDefiningDocument.Subscribe(defDoc =>
+        OpenDefiningDocument.Subscribe(re =>
         {
+            if (re.DefiningDocument is not { } defDoc) return;
             var parsed = ParseDefiningDocumentField(defDoc);
             if (parsed is null) return;
             var (cat, num) = parsed.Value;
@@ -114,8 +113,8 @@ public partial class MainViewModel : IDisposable
     public BindableReactiveProperty<string?> SearchUl12 { get; }
     public INotifyCollectionChangedSynchronizedView<RegisterEntryViewModel> EntriesView { get; }
     public BindableReactiveProperty<int> SelectedRowIndex { get; }
-    public ReactiveCommand<Unit> CopyCommand { get; }
-    public ReactiveCommand<string> OpenDefiningDocument { get; }
+    public ReactiveCommand<RegisterEntryViewModel> CopyCommand { get; }
+    public ReactiveCommand<RegisterEntryViewModel> OpenDefiningDocument { get; }
 
     internal void RefreshTable()
     {
