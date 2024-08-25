@@ -7,14 +7,11 @@
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
         <MergeResourceInclude Source="/Themes/Themes.axaml" />
-        <MergeResourceInclude Source="/Themes/Icons.axaml" />
-        <MergeResourceInclude Source="/Themes/SelectingItemsControl.axaml" />
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Application.Resources>
   <Application.Styles>
     <FluentTheme DensityStyle="Compact" />
-    <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
     <StyleInclude Source="avares://Avalonia.Controls.TreeDataGrid/Themes/Fluent.axaml"/>
     <StyleInclude Source="/Themes/AppStyles.axaml"/>
   </Application.Styles>
