@@ -15,10 +15,10 @@ public class Shim : MainViewModel
         {
             Columns =
             {
-                new TextColumn<RegisterEntryViewModel, string>("Register", x => x.Register),
-                new TextColumn<RegisterEntryViewModel, string>("Symbol", x => x.Symbol, new GridLength(200, GridUnitType.Pixel)),
-                new TextColumn<RegisterEntryViewModel, string>("Document", x => x.DefiningDocument),
-                new TextColumn<RegisterEntryViewModel, string>("UL", x => x.Ul, new GridLength(324, GridUnitType.Auto)),
+                new TextColumn<RegisterEntryViewModel, string>("Register", x => x.Register, new GridLength(0, GridUnitType.Auto)),
+                new TextColumn<RegisterEntryViewModel, string>("Symbol", x => x.Symbol, new GridLength(1, GridUnitType.Star)),
+                new TextColumn<RegisterEntryViewModel, string>("Document", x => x.DefiningDocument, new GridLength(.5, GridUnitType.Star)),
+                new TextColumn<RegisterEntryViewModel, string>("UL", x => x.Ul),
             },
         };
         Source.Value.RowSelection!.SingleSelect = false;
