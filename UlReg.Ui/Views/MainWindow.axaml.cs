@@ -13,18 +13,6 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
 
-        KeyBindings.Add(new KeyBinding
-        {
-            Gesture = new KeyGesture(Key.A, KeyModifiers.Control | KeyModifiers.Shift),
-            Command = new ReactiveCommand<Unit>(_ =>
-            {
-                if (Application.Current is App application)
-                {
-                    application.ToggleAcrylicBlur();
-                }
-            })
-        });
-
         _defaultFontSize = FontSize;
 
         KeyBindings.Add(new KeyBinding
