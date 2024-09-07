@@ -19,4 +19,35 @@
   <Style Selector=".status-bar TextElement">
     <Setter Property="Foreground" Value="#737575" />
   </Style>
+
+  <Style Selector="TreeDataGrid">
+    <Setter Property="Background" Value="#ffffff" />
+  </Style>
+  <Style Selector="TreeDataGridRow">
+    <Setter Property="Height" Value="20" />
+  </Style>
+  <Style Selector="TreeDataGridRow:nth-child(even)">
+    <Setter Property="Background" Value="#f4f5f5" />
+  </Style>
+  <Style Selector="TreeDataGridColumnHeader:nth-child(4), TreeDataGridRow  TreeDataGridTextCell:nth-child(4)">
+    <Setter Property="TextElement.Foreground" Value="#837f80" />
+    <Setter Property="TextElement.FontFamily" Value="Menlo" />
+  </Style>
+
+  <Style Selector="Rectangle.top-bar--separator-color">
+    <Setter Property="Fill" Value="#d9d9d9" />
+  </Style>
+
+  <Style Selector="StackPanel.status-bar">
+    <Setter Property="Background" Value="#f1f4f4" />
+  </Style>
+
+  <Style Selector="Rectangle.status-bar--separator-color-1">
+    <Setter Property="Fill" Value="#e4e6e6" />
+  </Style>
+
+  <Style Selector="Rectangle.status-bar--separator-color-2">
+    <Setter Property="Fill" Value="#c6c8c8" />
+  </Style>
+
 </Styles>

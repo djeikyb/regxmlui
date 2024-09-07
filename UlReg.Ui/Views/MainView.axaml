@@ -59,13 +59,13 @@
     </Grid>
 
     <Rectangle HorizontalAlignment="Stretch"
-               Fill="#d9d9d9"
                Height="1"
                Margin="0 0 0 0"
+               Classes="top-bar--separator-color"
                DockPanel.Dock="Top" />
 
-    <StackPanel Background="#f1f4f4"
-                Orientation="Horizontal"
+    <StackPanel Orientation="Horizontal"
+                Classes="status-bar"
                 DockPanel.Dock="Bottom">
       <TextBlock HorizontalAlignment="Left" Padding="6">
         <Run Text="Total:" />
@@ -78,39 +78,25 @@
     </StackPanel>
 
     <Rectangle HorizontalAlignment="Stretch"
-               Fill="#c6c8c8"
                Height="0.5"
                Margin="0 0 0 0"
+               Classes="status-bar--separator-color-2"
                DockPanel.Dock="Bottom" />
     <!-- bottom ⬆️  -->
     <!-- because dock priority, the stack of down docked items -->
     <!-- the first one is the most down -->
     <!-- ⬇️ top -->
     <Rectangle HorizontalAlignment="Stretch"
-               Fill="#e4e6e6"
                Height="0.5"
                Margin="0 0 0 0"
+               Classes="status-bar--separator-color-1"
                DockPanel.Dock="Bottom" />
 
     <TreeDataGrid
       Margin="0 0 0 0"
       Padding="0 0 0 0"
       Source="{Binding Source.Value}"
-      Background="#ffffff"
-
       Name="MyTreeDataGrid">
-      <TreeDataGrid.Styles>
-        <Style Selector="TreeDataGridRow">
-          <Setter Property="Height" Value="20"/>
-        </Style>
-        <Style Selector="TreeDataGridRow:nth-child(even)">
-          <Setter Property="Background" Value="#f4f5f5" />
-        </Style>
-        <Style Selector="TreeDataGridColumnHeader:nth-child(4), TreeDataGridRow  TreeDataGridTextCell:nth-child(4)">
-          <Setter Property="TextElement.Foreground" Value="#837f80"/>
-          <Setter Property="TextElement.FontFamily" Value="Menlo" />
-        </Style>
-      </TreeDataGrid.Styles>
     </TreeDataGrid>
 
   </DockPanel>
