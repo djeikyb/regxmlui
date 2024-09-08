@@ -20,6 +20,7 @@
         Topmost="{Binding Topmost.Value}"
         FontFamily="SF Pro"
         FontSize="12"
+        Background="{DynamicResource AcrylicColor}"
         x:Name="Main"
         x:CompileBindings="True" x:DataType="views:Shim">
   <Panel>
@@ -30,8 +31,8 @@
         <ExperimentalAcrylicMaterial BackgroundSource="None"
                                      TintColor="{DynamicResource AcrylicColor}"
                                      FallbackColor="{DynamicResource AcrylicColor}"
-                                     TintOpacity="1"
-                                     MaterialOpacity="1" />
+                                     TintOpacity="0"
+                                     MaterialOpacity="0" />
       </ExperimentalAcrylicBorder.Material>
     </ExperimentalAcrylicBorder>
     <Panel Margin="{Binding #Main.OffScreenMargin}">

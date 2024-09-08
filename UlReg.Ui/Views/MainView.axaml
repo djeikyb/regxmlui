@@ -59,9 +59,14 @@
     </Grid>
 
     <Rectangle HorizontalAlignment="Stretch"
-               Height="1"
+               Height="0.5"
+               Fill="{DynamicResource TitleBarSeparatorColorTop}"
                Margin="0 0 0 0"
-               Classes="top-bar--separator-color"
+               DockPanel.Dock="Top" />
+    <Rectangle HorizontalAlignment="Stretch"
+               Height="0.5"
+               Fill="{DynamicResource TitleBarSeparatorColorBottom}"
+               Margin="0 0 0 0"
                DockPanel.Dock="Top" />
 
     <StackPanel Orientation="Horizontal"
@@ -80,7 +85,7 @@
     <Rectangle HorizontalAlignment="Stretch"
                Height="0.5"
                Margin="0 0 0 0"
-               Classes="status-bar--separator-color-2"
+               Fill="{DynamicResource StatusBarSeparatorColorBottom}"
                DockPanel.Dock="Bottom" />
     <!-- bottom ⬆️  -->
     <!-- because dock priority, the stack of down docked items -->
@@ -89,7 +94,7 @@
     <Rectangle HorizontalAlignment="Stretch"
                Height="0.5"
                Margin="0 0 0 0"
-               Classes="status-bar--separator-color-1"
+               Fill="{DynamicResource StatusBarSeparatorColorTop}"
                DockPanel.Dock="Bottom" />
 
     <TreeDataGrid
