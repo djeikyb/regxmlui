@@ -31,8 +31,8 @@
         <ExperimentalAcrylicMaterial BackgroundSource="None"
                                      TintColor="{DynamicResource AcrylicColor}"
                                      FallbackColor="{DynamicResource AcrylicColor}"
-                                     TintOpacity="0"
-                                     MaterialOpacity="0" />
+                                     TintOpacity="{Binding TintOpacity.Value}"
+                                     MaterialOpacity="{Binding MaterialOpacity.Value}" />
       </ExperimentalAcrylicBorder.Material>
     </ExperimentalAcrylicBorder>
     <Panel Margin="{Binding #Main.OffScreenMargin}">

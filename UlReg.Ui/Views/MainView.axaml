@@ -71,6 +71,7 @@
 
     <StackPanel Orientation="Horizontal"
                 Classes="status-bar"
+                Name="StatusBar"
                 DockPanel.Dock="Bottom">
       <TextBlock HorizontalAlignment="Left" Padding="6">
         <Run Text="Total:" />

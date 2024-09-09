@@ -1,0 +1,105 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:UlReg.ViewModels;assembly=UlReg.Core"
+        xmlns:views="clr-namespace:UlReg.Views"
+        mc:Ignorable="d" d:DesignWidth="450" d:DesignHeight="740"
+        x:Class="UlReg.Views.SettingsWindow"
+        Title="Universal Labels"
+        TransparencyLevelHint="AcrylicBlur"
+        ExtendClientAreaToDecorationsHint="True"
+        ExtendClientAreaChromeHints="PreferSystemChrome"
+        ExtendClientAreaTitleBarHeightHint="-1"
+        SystemDecorations="Full"
+        Width="300"
+        Height="200"
+        WindowState="Normal"
+        WindowStartupLocation="Manual"
+        Topmost="{Binding Topmost.Value}"
+        FontFamily="SF Pro"
+        FontSize="12"
+        Background="{DynamicResource AcrylicColor}"
+        x:Name="Meeeee"
+        x:CompileBindings="True" x:DataType="views:Shim">
+  <Panel>
+    <ExperimentalAcrylicBorder Name="AcrylicBorder"
+                               IsHitTestVisible="False"
+                               IsVisible="True">
+      <ExperimentalAcrylicBorder.Material>
+        <ExperimentalAcrylicMaterial BackgroundSource="None"
+                                     TintColor="{DynamicResource AcrylicColor}"
+                                     FallbackColor="{DynamicResource AcrylicColor}"
+                                     TintOpacity="{Binding TintOpacity.Value}"
+                                     MaterialOpacity="{Binding MaterialOpacity.Value}" />
+      </ExperimentalAcrylicBorder.Material>
+    </ExperimentalAcrylicBorder>
+    <Panel Margin="{Binding #Meeeee.OffScreenMargin}">
+      <Panel Margin="{Binding #Meeeee.WindowDecorationMargin}">
+        <Grid
+          VerticalAlignment="Center"
+          HorizontalAlignment="Center"
+          Width="300"
+          Height="200"
+          Margin="9"
+          RowDefinitions="* *"
+          ColumnDefinitions="Auto Auto Auto">
+
+          <!-- tint -->
+
+          <Label Content="Tint Opacity"
+                 VerticalAlignment="Center"
+                 HorizontalAlignment="Right"
+                 Grid.Row="0"
+                 Grid.Column="0" />
+          <Slider
+            Width="100"
+            Minimum="0"
+            Maximum="1.0"
+            TickFrequency="0.05"
+            IsSnapToTickEnabled="True"
+            Value="{Binding TintOpacity.Value}"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Stretch"
+            Margin="9 0 9 0"
+            Grid.Row="0"
+            Grid.Column="1" />
+          <SelectableTextBlock
+            Text="{Binding TintOpacity.Value}"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Left"
+            Grid.Row="0"
+            Grid.Column="2" />
+
+          <!-- material -->
+
+          <Label Content="Material Opacity"
+                 VerticalAlignment="Center"
+                 HorizontalAlignment="Right"
+                 Grid.Row="1"
+                 Grid.Column="0" />
+          <Slider
+            Width="100"
+            Minimum="0"
+            Maximum="1.0"
+            TickFrequency="0.05"
+            IsSnapToTickEnabled="True"
+            Value="{Binding MaterialOpacity.Value}"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Stretch"
+            Margin="9 0 9 0"
+            Grid.Row="1"
+            Grid.Column="1" />
+          <SelectableTextBlock
+            Text="{Binding MaterialOpacity.Value}"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Left"
+            Grid.Row="1"
+            Grid.Column="2" />
+
+        </Grid>
+
+      </Panel>
+    </Panel>
+  </Panel>
+</Window>

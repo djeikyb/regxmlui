@@ -28,8 +28,13 @@ public class Shim : MainViewModel
         SelectedRowsCount = Source.Value.RowSelection
             .ObservePropertyChanged(x => x.Count)
             .ToBindableReactiveProperty();
+
+        MaterialOpacity = new(1);
+        TintOpacity = new(1);
     }
 
+    public BindableReactiveProperty<double> MaterialOpacity { get; }
+    public BindableReactiveProperty<double> TintOpacity { get; }
 
     public BindableReactiveProperty<FlatTreeDataGridSource<RegisterEntryViewModel>?> Source { get; }
     public BindableReactiveProperty<int> SelectedRowsCount { get; }
