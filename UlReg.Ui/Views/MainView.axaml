@@ -21,7 +21,7 @@
 
       <StackPanel Grid.Column="0">
         <Label Content="Term" />
-        <TextBox Name="InputSearchTerm" Text="{Binding SearchTerm.Value}"/>
+        <TextBox Name="InputSearchTerm" Text="{Binding SearchTerm.Value}" />
       </StackPanel>
 
       <StackPanel Grid.Column="1" Margin="9 0 0 0">
@@ -79,7 +79,7 @@
       </TextBlock>
       <TextBlock Padding="6">
         <Run Text="Selected:" />
-        <Run Text="{Binding SelectedRowsCount.Value, Mode=OneWay}"/>
+        <Run Text="{Binding SelectedRowsCount.Value, Mode=OneWay}" />
       </TextBlock>
     </StackPanel>
 
