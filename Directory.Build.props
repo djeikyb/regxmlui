@@ -9,7 +9,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <AvaloniaVersion>11.2.1</AvaloniaVersion>
-    <MicrosoftExtensionsDependencyInjectionVersion>8.0.0</MicrosoftExtensionsDependencyInjectionVersion>
+    <MicrosoftExtensionsDependencyInjectionVersion>9.0.3</MicrosoftExtensionsDependencyInjectionVersion>
   </PropertyGroup>
   <PropertyGroup>
     <ArtifactsPath>$(MSBuildThisFileDirectory)artifacts</ArtifactsPath>

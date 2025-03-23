@@ -111,7 +111,7 @@ public partial class MainViewModel : IDisposable
     public BindableReactiveProperty<string?> SearchUl4 { get; }
     public BindableReactiveProperty<string?> SearchUl8 { get; }
     public BindableReactiveProperty<string?> SearchUl12 { get; }
-    public INotifyCollectionChangedSynchronizedView<RegisterEntryViewModel> EntriesView { get; }
+    public NotifyCollectionChangedSynchronizedViewList<RegisterEntryViewModel> EntriesView { get; }
     public BindableReactiveProperty<int> SelectedRowIndex { get; }
     public ReactiveCommand<RegisterEntryViewModel> CopyCommand { get; }
     public ReactiveCommand<RegisterEntryViewModel> OpenDefiningDocument { get; }
