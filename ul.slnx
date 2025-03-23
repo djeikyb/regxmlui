@@ -8,6 +8,7 @@
     <File Path="Directory.Build.props" />
     <File Path="global.json" />
   </Folder>
+  <Project Path="TurboXml/src/TurboXml/TurboXml.csproj" />
   <Project Path="RegXml/RegXml.csproj" />
   <Project Path="UlReg.Core/UlReg.Core.csproj" />
   <Project Path="UlReg.Tests/UlReg.Tests.csproj" />

@@ -1,0 +1,4 @@
+[submodule "TurboXml"]
+	path = TurboXml
+	url = https://github.com/djeikyb/TurboXml.git
+	branch = support-unseekable-streams

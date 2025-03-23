@@ -25,6 +25,7 @@
     <ItemGroup>
       <ProjectReference Include="..\sandbox\SearchBench\SearchBench.csproj" />
       <ProjectReference Include="..\UlReg.Core\UlReg.Core.csproj" />
+      <ProjectReference Include="..\TurboXml\src\TurboXml\TurboXml.csproj" />
     </ItemGroup>
 
 </Project>
