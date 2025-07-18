@@ -1,0 +1,14 @@
+<Solution>
+  <Folder Name="/build/">
+    <File Path=".editorconfig" />
+    <File Path=".gitignore" />
+    <File Path="Directory.Build.props" />
+    <File Path="global.json" />
+  </Folder>
+  <Project Path="RegXml/RegXml.csproj" />
+  <Project Path="UlReg.Core/UlReg.Core.csproj" />
+  <Project Path="UlReg.Tests/UlReg.Tests.csproj" />
+  <Project Path="UlReg.Ui.Desktop/UlReg.Ui.Desktop.csproj" />
+  <Project Path="UlReg.Ui/UlReg.Ui.csproj" />
+  <Project Path="UlReg/UlReg.csproj" />
+</Solution>
