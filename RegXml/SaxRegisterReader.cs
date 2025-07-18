@@ -29,6 +29,8 @@ public struct SaxRegisterReader : IXmlReadHandler
     private string _currentElementValue = string.Empty;
     private bool _currentTagIsRegister = false;
 
+    private bool _readTagText = false;
+
     public SaxRegisterReader(RegisterName register)
     {
         _register = Enum.GetName(register) ?? throw new Exception("Enum name failed.");
@@ -54,11 +56,16 @@ public struct SaxRegisterReader : IXmlReadHandler
                 _current = new SaxEntry { Register = _register };
                 break;
             }
-            case "Register":
-            {
-                _currentTagIsRegister = true;
+            // The register tag's text is constant within a register.
+            // Don't bother reading it.
+            case "Symbol":
+            case "UL":
+            case "DefiningDocument":
+                _readTagText = true;
                 break;
-            }
+            default:
+                _readTagText = false;
+                break;
         }
 
         _depth++;
@@ -66,8 +73,6 @@ public struct SaxRegisterReader : IXmlReadHandler
 
     public void OnEndTag(ReadOnlySpan<char> name, int line, int column)
     {
-        if (name is "Register") _currentTagIsRegister = false;
-
         if (_depth == 4)
         {
             if (name is "UL") _current.Ul = Ul.FromUrn(_currentElementValue);
@@ -88,7 +93,7 @@ public struct SaxRegisterReader : IXmlReadHandler
 
     public void OnText(ReadOnlySpan<char> text, int line, int column)
     {
-        if (_currentTagIsRegister) return;
+        if (!_readTagText) return;
         if (_depth != 4) return;
 
         var s = new string(text);
