@@ -1,4 +1,5 @@
 using System.Xml;
+using CommunityToolkit.HighPerformance.Buffers;
 using TurboXml;
 
 namespace RegXml;
@@ -96,8 +97,7 @@ public struct SaxRegisterReader : IXmlReadHandler
         if (!_readTagText) return;
         if (_depth != 4) return;
 
-        var s = new string(text);
-        _currentElementValue = s;
+        _currentElementValue = StringPool.Shared.GetOrAdd(text);
     }
 
     public void OnXmlDeclaration(ReadOnlySpan<char> version, ReadOnlySpan<char> encoding, ReadOnlySpan<char> standalone,
