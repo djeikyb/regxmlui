@@ -97,8 +97,7 @@ public struct SaxRegisterReader : IXmlReadHandler
         if (_depth != 4) return;
 
         var s = new string(text);
-        var i = string.IsInterned(s);
-        _currentElementValue = i == null ? s : i;
+        _currentElementValue = s;
     }
 
     public void OnXmlDeclaration(ReadOnlySpan<char> version, ReadOnlySpan<char> encoding, ReadOnlySpan<char> standalone,
