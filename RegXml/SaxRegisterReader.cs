@@ -80,6 +80,8 @@ public struct SaxRegisterReader : IXmlReadHandler
 
     public void OnText(ReadOnlySpan<char> text, int line, int column)
     {
+        if (_depth != 4) return;
+
         var s = new string(text);
         var i = string.IsInterned(s);
         _currentElementValue = i == null ? s : i;
