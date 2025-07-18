@@ -9,11 +9,11 @@ namespace UlReg.Tests;
 
 public class RegXmlSanityTests
 {
-    private static readonly IReadOnlyList<SaxEntry> _entries;
+    private static readonly IReadOnlyList<RegisterEntry> _entries;
 
     static RegXmlSanityTests()
     {
-        var list = new List<SaxEntry>();
+        var list = new List<RegisterEntry>();
 
         using var zip = new ZipArchive(Registers.Open());
         foreach (string r in (string[])["Elements", "Essence", "Groups", "Labels", "Types"])

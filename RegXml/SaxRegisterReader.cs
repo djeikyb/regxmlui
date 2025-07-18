@@ -18,7 +18,7 @@ public struct SaxEntry
 
 public struct SaxRegisterReader : IXmlReadHandler
 {
-    public SaxEntry[] Entries;
+    public RegisterEntry[] Entries;
     private int i;
     private readonly string _register;
     private int _depth = 0;
@@ -33,11 +33,11 @@ public struct SaxRegisterReader : IXmlReadHandler
         _register = Enum.GetName(register) ?? throw new Exception("Enum name failed.");
         Entries = register switch
         {
-            RegisterName.Elements => new SaxEntry[3729],
-            RegisterName.Essence => new SaxEntry[78],
-            RegisterName.Groups => new SaxEntry[599],
-            RegisterName.Labels => new SaxEntry[3885],
-            RegisterName.Types => new SaxEntry[607],
+            RegisterName.Elements => new RegisterEntry[3729],
+            RegisterName.Essence => new RegisterEntry[78],
+            RegisterName.Groups => new RegisterEntry[599],
+            RegisterName.Labels => new RegisterEntry[3885],
+            RegisterName.Types => new RegisterEntry[607],
             _ => throw new RegisterLoadException($"Unknown register: {register}")
         };
     }
@@ -66,7 +66,14 @@ public struct SaxRegisterReader : IXmlReadHandler
             if (name is "Symbol") _current.Symbol = _currentElementValue;
             if (name is "DefiningDocument") _current.DefiningDocument = _currentElementValue;
         }
-        else if (name is "Entry") Entries[i++] = _current;
+        else if (name is "Entry") Entries[i++] = new RegisterEntry
+        {
+            // unit tests prove not null, safe to bang
+            Register = _current.Register!,
+            Symbol = _current.Symbol!,
+            Ul = _current.Ul!,
+            DefiningDocument = _current.DefiningDocument,
+        };
 
         _depth--;
     }

@@ -94,11 +94,11 @@ public class Registers
 
     public static Registers FromSax()
     {
-        SaxEntry[]? essence = null;
-        SaxEntry[]? types = null;
-        SaxEntry[]? labels = null;
-        SaxEntry[]? groups = null;
-        SaxEntry[]? elements = null;
+        RegisterEntry[]? essence = null;
+        RegisterEntry[]? types = null;
+        RegisterEntry[]? labels = null;
+        RegisterEntry[]? groups = null;
+        RegisterEntry[]? elements = null;
         using var z = new ZipArchive(Open());
 
         foreach (var entry in z.Entries)
