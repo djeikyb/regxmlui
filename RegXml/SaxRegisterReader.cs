@@ -27,6 +27,7 @@ public struct SaxRegisterReader : IXmlReadHandler
 
     // private ReadOnlySpan<char> _currentElementValue;
     private string _currentElementValue = string.Empty;
+    private bool _currentTagIsRegister = false;
 
     public SaxRegisterReader(RegisterName register)
     {
@@ -53,6 +54,11 @@ public struct SaxRegisterReader : IXmlReadHandler
                 _current = new SaxEntry { Register = _register };
                 break;
             }
+            case "Register":
+            {
+                _currentTagIsRegister = true;
+                break;
+            }
         }
 
         _depth++;
@@ -60,6 +66,8 @@ public struct SaxRegisterReader : IXmlReadHandler
 
     public void OnEndTag(ReadOnlySpan<char> name, int line, int column)
     {
+        if (name is "Register") _currentTagIsRegister = false;
+
         if (_depth == 4)
         {
             if (name is "UL") _current.Ul = Ul.FromUrn(_currentElementValue);
@@ -80,6 +88,7 @@ public struct SaxRegisterReader : IXmlReadHandler
 
     public void OnText(ReadOnlySpan<char> text, int line, int column)
     {
+        if (_currentTagIsRegister) return;
         if (_depth != 4) return;
 
         var s = new string(text);
