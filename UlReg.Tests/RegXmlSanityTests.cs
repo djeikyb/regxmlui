@@ -1,5 +1,7 @@
 using System.IO.Compression;
 using System.Text;
+using System.Xml.Linq;
+using System.Xml.XPath;
 using RegXml;
 using TurboXml;
 
@@ -41,18 +43,6 @@ public class RegXmlSanityTests
         _entries = list;
     }
 
-    // Would it actually be better to use xpath for this?
-    //
-    // public bool EntryPropertyAlwaysExists(string property)
-    // {
-    //     const string xpathTotal = "count(//*[local-name() = 'Entries']/*[local-name() = 'Entry'])";
-    //     var totalElements = (double)_doc.XPathEvaluate(xpathTotal);
-    //     string xpathForProperty =
-    //         $"count(//*[local-name() = 'Entries']/*[local-name() = 'Entry']/*[local-name() = '{property}'])";
-    //     var elementsWithProperty = (double)_doc.XPathEvaluate(xpathForProperty);
-    //     return Convert.ToInt64(totalElements) == Convert.ToInt64(elementsWithProperty);
-    // }
-
     [Fact]
     public void RegAllTheIsters()
     {
@@ -62,24 +52,36 @@ public class RegXmlSanityTests
     }
 
     [Fact]
-    public void SymbolAlwaysExists()
+    public void GuaranteeSomeEntryPropertiesExist()
     {
-        var e = _entries.FirstOrDefault(x => x.Symbol is null);
-        Assert.Equal(default, e);
+        using var zip = new ZipArchive(Registers.Open());
+        foreach (string r in (string[])["Elements", "Essence", "Groups", "Labels", "Types"])
+        {
+            var found = zip.Entries.FirstOrDefault(x => x.Name.Equals($"{r}.xml"));
+            Assert.NotNull(found);
+            var ms = new MemoryStream();
+            using (var z = found.Open())
+            {
+                z.CopyTo(ms);
+
+                ms.Position = 0;
+                var doc = XDocument.Load(ms);
+
+                Assert.True(EntryPropertyAlwaysExists(doc, "Symbol"));
+                Assert.True(EntryPropertyAlwaysExists(doc, "Register"));
+                Assert.True(EntryPropertyAlwaysExists(doc, "UL"));
+            }
+        }
     }
 
-    [Fact]
-    public void RegisterAlwaysExists()
+    private static bool EntryPropertyAlwaysExists(XDocument doc, string property)
     {
-        var e = _entries.FirstOrDefault(x => x.Register is null);
-        Assert.Equal(default, e);
-    }
-
-    [Fact]
-    public void UlAlwaysExists()
-    {
-        var e = _entries.FirstOrDefault(x => x.Ul is null);
-        Assert.Equal(default, e);
+        const string xpathTotal = "count(//*[local-name() = 'Entries']/*[local-name() = 'Entry'])";
+        var totalElements = (double)doc.XPathEvaluate(xpathTotal);
+        string xpathForProperty =
+            $"count(//*[local-name() = 'Entries']/*[local-name() = 'Entry']/*[local-name() = '{property}'])";
+        var elementsWithProperty = (double)doc.XPathEvaluate(xpathForProperty);
+        return Convert.ToInt64(totalElements) == Convert.ToInt64(elementsWithProperty);
     }
 
     [Fact]
