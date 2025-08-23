@@ -2,6 +2,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using UlReg.ViewModels;
+using UlRegBiz.Model.Xml;
 
 namespace UlReg.Views;
 
@@ -29,7 +30,7 @@ public partial class MainView : UserControl
             Console.WriteLine($"⚡️ {nameof(MyTreeDataGrid)} copy!");
             var tdg = (TreeDataGrid)sender!;
             if (tdg.RowSelection is not { SelectedItem: { } row }) return;
-            if (row is not RegisterEntryViewModel re) return;
+            if (row is not RegisterEntry re) return;
             var vm = (MainViewModel?)DataContext;
             if (vm == null) return;
             vm.CopyCommand.Execute(re);
@@ -48,7 +49,7 @@ public partial class MainView : UserControl
 
             Console.WriteLine($"⚡️ double-tapped a row!");
             var vm = (MainViewModel)tdg.DataContext!;
-            vm.OpenDefiningDocument.Execute((RegisterEntryViewModel)cells.DataContext!);
+            vm.OpenDefiningDocument.Execute((RegisterEntry)cells.DataContext!);
         };
     }
 }

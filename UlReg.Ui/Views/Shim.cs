@@ -3,6 +3,7 @@ using Avalonia.Controls.Models.TreeDataGrid;
 using R3;
 using UlReg.Model.Services;
 using UlReg.ViewModels;
+using UlRegBiz.Model.Xml;
 
 namespace UlReg.Views;
 
@@ -11,14 +12,14 @@ public class Shim : MainViewModel
     public Shim(IApplicationService appService) : base(appService)
     {
         Source = new();
-        Source.Value = new FlatTreeDataGridSource<RegisterEntryViewModel>(EntriesView)
+        Source.Value = new FlatTreeDataGridSource<RegisterEntry>(EntriesView)
         {
             Columns =
             {
-                new TextColumn<RegisterEntryViewModel, string>("Register", x => x.Register, new GridLength(0, GridUnitType.Auto)),
-                new TextColumn<RegisterEntryViewModel, string>("Symbol", x => x.Symbol, new GridLength(1, GridUnitType.Star)),
-                new TextColumn<RegisterEntryViewModel, string>("Document", x => x.DefiningDocument, new GridLength(.5, GridUnitType.Star)),
-                new TextColumn<RegisterEntryViewModel, string>("UL", x => x.Ul),
+                new TextColumn<RegisterEntry, string>("Register", x => x.Register, new GridLength(0, GridUnitType.Auto)),
+                new TextColumn<RegisterEntry, string>("Symbol", x => x.Symbol, new GridLength(1, GridUnitType.Star)),
+                new TextColumn<RegisterEntry, string>("Document", x => x.DefiningDocument, new GridLength(.5, GridUnitType.Star)),
+                new TextColumn<RegisterEntry, string>("UL", x => x.Ul.ToOctets()),
             },
         };
         Source.Value.RowSelection!.SingleSelect = false;
@@ -36,6 +37,6 @@ public class Shim : MainViewModel
     public BindableReactiveProperty<double> MaterialOpacity { get; }
     public BindableReactiveProperty<double> TintOpacity { get; }
 
-    public BindableReactiveProperty<FlatTreeDataGridSource<RegisterEntryViewModel>?> Source { get; }
+    public BindableReactiveProperty<FlatTreeDataGridSource<RegisterEntry>?> Source { get; }
     public BindableReactiveProperty<int> SelectedRowsCount { get; }
 }

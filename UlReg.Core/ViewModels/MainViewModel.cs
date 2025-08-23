@@ -5,6 +5,7 @@ using R3;
 using RegXml;
 using UlReg.Model.Services;
 using UlRegBiz.Model.Services;
+using UlRegBiz.Model.Xml;
 using UlRegBiz.Services;
 
 namespace UlReg.ViewModels;
@@ -12,7 +13,7 @@ namespace UlReg.ViewModels;
 public partial class MainViewModel : IDisposable
 {
     private readonly IRegisterService _register;
-    private readonly ObservableList<RegisterEntryViewModel> _entries;
+    private readonly ObservableList<RegisterEntry> _entries;
 
     public MainViewModel(IApplicationService appService)
     {
@@ -27,9 +28,7 @@ public partial class MainViewModel : IDisposable
             new RegXmlService(registers.Types.Xml)
         );
 
-        _entries = new ObservableList<RegisterEntryViewModel>(
-            _register.All().Select(re => new RegisterEntryViewModel(re))
-        );
+        _entries = new ObservableList<RegisterEntry>(_register.All());
         EntriesView = _entries.CreateView(x => x).ToNotifyCollectionChanged();
 
         SearchTerm = new BindableReactiveProperty<string?>(string.Empty);
@@ -48,8 +47,7 @@ public partial class MainViewModel : IDisposable
         CopyCommand.Subscribe(re =>
         {
             Console.WriteLine($"🍝 copyCOPYcopy");
-            if (re.Ul is null) return;
-            appService.SetClipboardText(re.Ul);
+            appService.SetClipboardText(re.Ul.ToOctets());
         });
         OpenDefiningDocument = new();
         OpenDefiningDocument.Subscribe(re =>
@@ -111,10 +109,10 @@ public partial class MainViewModel : IDisposable
     public BindableReactiveProperty<string?> SearchUl4 { get; }
     public BindableReactiveProperty<string?> SearchUl8 { get; }
     public BindableReactiveProperty<string?> SearchUl12 { get; }
-    public NotifyCollectionChangedSynchronizedViewList<RegisterEntryViewModel> EntriesView { get; }
+    public NotifyCollectionChangedSynchronizedViewList<RegisterEntry> EntriesView { get; }
     public BindableReactiveProperty<int> SelectedRowIndex { get; }
-    public ReactiveCommand<RegisterEntryViewModel> CopyCommand { get; }
-    public ReactiveCommand<RegisterEntryViewModel> OpenDefiningDocument { get; }
+    public ReactiveCommand<RegisterEntry> CopyCommand { get; }
+    public ReactiveCommand<RegisterEntry> OpenDefiningDocument { get; }
 
     internal void RefreshTable()
     {
@@ -126,16 +124,16 @@ public partial class MainViewModel : IDisposable
             && SearchUl12.Value is not { Length: > 0 }
             && SearchTerm.Value is not { Length: > 2 })
         {
-            _entries.AddRange(_register.All().Select(re => new RegisterEntryViewModel(re)));
+            _entries.AddRange(_register.All());
         }
         else
         {
             _entries.AddRange(
                 _register.Search(
-                        SearchTerm.Value,
-                        SearchUl0.Value, SearchUl4.Value,
-                        SearchUl8.Value, SearchUl12.Value)
-                    .Select(re => new RegisterEntryViewModel(re)));
+                    SearchTerm.Value,
+                    SearchUl0.Value, SearchUl4.Value,
+                    SearchUl8.Value, SearchUl12.Value)
+            );
         }
     }
 
