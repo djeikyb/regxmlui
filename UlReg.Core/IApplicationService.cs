@@ -1,4 +1,4 @@
-namespace UlReg.Model.Services;
+namespace UlReg;
 
 public interface IApplicationService
 {

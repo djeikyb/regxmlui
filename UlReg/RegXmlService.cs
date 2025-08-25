@@ -2,10 +2,8 @@ using System.Linq.Expressions;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using System.Xml.XPath;
-using UlRegBiz.Model.Services;
-using UlRegBiz.Model.Xml;
 
-namespace UlRegBiz.Services;
+namespace UlRegBiz;
 
 public class RegXmlService : IRegisterService
 {

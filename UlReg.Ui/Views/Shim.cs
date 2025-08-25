@@ -1,9 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Controls.Models.TreeDataGrid;
 using R3;
-using UlReg.Model.Services;
-using UlReg.ViewModels;
-using UlRegBiz.Model.Xml;
+using UlRegBiz;
 
 namespace UlReg.Views;
 

@@ -1,5 +1,4 @@
 using Avalonia.Controls;
-using UlReg.Model.Services;
 
 namespace UlReg;
 

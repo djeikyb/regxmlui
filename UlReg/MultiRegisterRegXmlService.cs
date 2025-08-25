@@ -1,7 +1,4 @@
-using UlRegBiz.Model.Services;
-using UlRegBiz.Model.Xml;
-
-namespace UlRegBiz.Services;
+namespace UlRegBiz;
 
 public class MultiRegisterRegXmlService : IRegisterService
 {

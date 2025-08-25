@@ -1,4 +1,4 @@
-namespace UlRegBiz.Model.Xml;
+namespace UlRegBiz;
 
 public class RegisterEntry
 {

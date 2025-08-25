@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace UlRegBiz.Model.Xml;
+namespace UlRegBiz;
 
 public class Ul
 {

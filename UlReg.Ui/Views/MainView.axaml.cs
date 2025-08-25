@@ -1,8 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Input;
-using UlReg.ViewModels;
-using UlRegBiz.Model.Xml;
+using UlRegBiz;
 
 namespace UlReg.Views;
 

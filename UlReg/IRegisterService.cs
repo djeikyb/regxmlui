@@ -1,6 +1,4 @@
-using UlRegBiz.Model.Xml;
-
-namespace UlRegBiz.Model.Services;
+namespace UlRegBiz;
 
 public interface IRegisterService
 {

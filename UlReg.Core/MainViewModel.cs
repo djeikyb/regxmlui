@@ -3,12 +3,9 @@ using System.Text.RegularExpressions;
 using ObservableCollections;
 using R3;
 using RegXml;
-using UlReg.Model.Services;
-using UlRegBiz.Model.Services;
-using UlRegBiz.Model.Xml;
-using UlRegBiz.Services;
+using UlRegBiz;
 
-namespace UlReg.ViewModels;
+namespace UlReg;
 
 public partial class MainViewModel : IDisposable
 {
