@@ -1,4 +1,4 @@
-﻿namespace RegXml;
+namespace RegXml;
 
 public class Ul
 {
@@ -100,6 +100,18 @@ public class Ul
         // _octets = $"{p1}.{p2}.{p3}.{p4}";
         // return _octets;
     }
+
+    public bool Equals(Ul? other) => other != null && _value.Span.SequenceEqual(other._value.Span);
+
+    public override bool Equals(object? obj)
+    {
+        if (ReferenceEquals(null, obj)) return false;
+        if (ReferenceEquals(this, obj)) return true;
+        if (obj.GetType() != this.GetType()) return false;
+        return Equals((Ul)obj);
+    }
+
+    public override int GetHashCode() => _value.GetHashCode();
 }
 
 public class UlException : Exception
