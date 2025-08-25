@@ -1,0 +1,468 @@
+// Validating benchmarks:
+// ***** BenchmarkRunner: Start   *****
+// ***** Found 2 benchmark(s) in total *****
+// ***** Building 1 exe(s) in Parallel: Start   *****
+// start dotnet  restore /p:UseSharedCompilation=false /p:BuildInParallel=false /m:1 /p:Deterministic=true /p:Optimize=true /p:ArtifactsPath="/Users/jacob/dev/me/active/ul/artifacts/bin/CompareSaxVsXDocument/release/CompareSaxVsXDocument-.NET 9.0-1/" /p:OutDir="/Users/jacob/dev/me/active/ul/artifacts/bin/CompareSaxVsXDocument/release/CompareSaxVsXDocument-.NET 9.0-1/bin/Release/net9.0/" /p:OutputPath="/Users/jacob/dev/me/active/ul/artifacts/bin/CompareSaxVsXDocument/release/CompareSaxVsXDocument-.NET 9.0-1/bin/Release/net9.0/" /p:PublishDir="/Users/jacob/dev/me/active/ul/artifacts/bin/CompareSaxVsXDocument/release/CompareSaxVsXDocument-.NET 9.0-1/publish/" in /Users/jacob/dev/me/active/ul/artifacts/bin/CompareSaxVsXDocument/release/CompareSaxVsXDocument-.NET 9.0-1
+// command took 0.55 sec and exited with 0
+// start dotnet  build -c Release --no-restore /p:UseSharedCompilation=false /p:BuildInParallel=false /m:1 /p:Deterministic=true /p:Optimize=true /p:ArtifactsPath="/Users/jacob/dev/me/active/ul/artifacts/bin/CompareSaxVsXDocument/release/CompareSaxVsXDocument-.NET 9.0-1/" /p:OutDir="/Users/jacob/dev/me/active/ul/artifacts/bin/CompareSaxVsXDocument/release/CompareSaxVsXDocument-.NET 9.0-1/bin/Release/net9.0/" /p:OutputPath="/Users/jacob/dev/me/active/ul/artifacts/bin/CompareSaxVsXDocument/release/CompareSaxVsXDocument-.NET 9.0-1/bin/Release/net9.0/" /p:PublishDir="/Users/jacob/dev/me/active/ul/artifacts/bin/CompareSaxVsXDocument/release/CompareSaxVsXDocument-.NET 9.0-1/publish/" --output "/Users/jacob/dev/me/active/ul/artifacts/bin/CompareSaxVsXDocument/release/CompareSaxVsXDocument-.NET 9.0-1/bin/Release/net9.0/" in /Users/jacob/dev/me/active/ul/artifacts/bin/CompareSaxVsXDocument/release/CompareSaxVsXDocument-.NET 9.0-1
+// command took 5.09 sec and exited with 0
+// ***** Done, took 00:00:05 (5.75 sec)   *****
+// Found 2 benchmarks:
+//   Deserialize.Sax: .NET 9.0(Runtime=.NET 9.0)
+//   Deserialize.XDocument: .NET 9.0(Runtime=.NET 9.0)
+
+// **************************
+// Benchmark: Deserialize.Sax: .NET 9.0(Runtime=.NET 9.0)
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet "CompareSaxVsXDocument-.NET 9.0-1.dll" --anonymousPipes 120 121 --benchmarkName Benchmark.Deserialize.Sax --job ".NET 9.0" --benchmarkId 0 in /Users/jacob/dev/me/active/ul/artifacts/bin/CompareSaxVsXDocument/release/CompareSaxVsXDocument-.NET 9.0-1/bin/Release/net9.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.15.2
+// Runtime=.NET 9.0.5 (9.0.525.21509), Arm64 RyuJIT AdvSIMD
+// GC=Concurrent Workstation
+// HardwareIntrinsics=AdvSIMD,AES,CRC32,DP,RDM,SHA1,SHA256 VectorSize=128
+// Job: .NET 9.0
+
+OverheadJitting  1: 1 op, 77958.00 ns, 77.9580 us/op
+WorkloadJitting  1: 1 op, 34651958.00 ns, 34.6520 ms/op
+
+WorkloadPilot    1: 2 op, 24983166.00 ns, 12.4916 ms/op
+WorkloadPilot    2: 3 op, 39700042.00 ns, 13.2333 ms/op
+WorkloadPilot    3: 4 op, 50860916.00 ns, 12.7152 ms/op
+WorkloadPilot    4: 5 op, 62478000.00 ns, 12.4956 ms/op
+WorkloadPilot    5: 6 op, 76776375.00 ns, 12.7961 ms/op
+WorkloadPilot    6: 7 op, 89202375.00 ns, 12.7432 ms/op
+WorkloadPilot    7: 8 op, 99476583.00 ns, 12.4346 ms/op
+WorkloadPilot    8: 9 op, 115232208.00 ns, 12.8036 ms/op
+WorkloadPilot    9: 10 op, 141767125.00 ns, 14.1767 ms/op
+WorkloadPilot   10: 11 op, 138498542.00 ns, 12.5908 ms/op
+WorkloadPilot   11: 12 op, 177047500.00 ns, 14.7540 ms/op
+WorkloadPilot   12: 13 op, 191536959.00 ns, 14.7336 ms/op
+WorkloadPilot   13: 14 op, 205271708.00 ns, 14.6623 ms/op
+WorkloadPilot   14: 15 op, 216629875.00 ns, 14.4420 ms/op
+WorkloadPilot   15: 16 op, 229896541.00 ns, 14.3685 ms/op
+WorkloadPilot   16: 32 op, 470098334.00 ns, 14.6906 ms/op
+WorkloadPilot   17: 64 op, 942564750.00 ns, 14.7276 ms/op
+
+OverheadWarmup   1: 64 op, 1209.00 ns, 18.8906 ns/op
+OverheadWarmup   2: 64 op, 250.00 ns, 3.9063 ns/op
+OverheadWarmup   3: 64 op, 291.00 ns, 4.5469 ns/op
+OverheadWarmup   4: 64 op, 208.00 ns, 3.2500 ns/op
+OverheadWarmup   5: 64 op, 209.00 ns, 3.2656 ns/op
+OverheadWarmup   6: 64 op, 208.00 ns, 3.2500 ns/op
+
+// BeforeActualRun
+WorkloadActual   1: 64 op, 944396458.00 ns, 14.7562 ms/op
+WorkloadActual   2: 64 op, 941465375.00 ns, 14.7104 ms/op
+WorkloadActual   3: 64 op, 949747333.00 ns, 14.8398 ms/op
+WorkloadActual   4: 64 op, 938721667.00 ns, 14.6675 ms/op
+WorkloadActual   5: 64 op, 948287416.00 ns, 14.8170 ms/op
+WorkloadActual   6: 64 op, 943932584.00 ns, 14.7489 ms/op
+WorkloadActual   7: 64 op, 938137291.00 ns, 14.6584 ms/op
+WorkloadActual   8: 64 op, 936248083.00 ns, 14.6289 ms/op
+WorkloadActual   9: 64 op, 948035833.00 ns, 14.8131 ms/op
+WorkloadActual  10: 64 op, 944303209.00 ns, 14.7547 ms/op
+WorkloadActual  11: 64 op, 953325292.00 ns, 14.8957 ms/op
+WorkloadActual  12: 64 op, 957160833.00 ns, 14.9556 ms/op
+WorkloadActual  13: 64 op, 932813042.00 ns, 14.5752 ms/op
+WorkloadActual  14: 64 op, 935561958.00 ns, 14.6182 ms/op
+WorkloadActual  15: 64 op, 941533458.00 ns, 14.7115 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 64 op, 944396458.00 ns, 14.7562 ms/op
+WorkloadResult   2: 64 op, 941465375.00 ns, 14.7104 ms/op
+WorkloadResult   3: 64 op, 949747333.00 ns, 14.8398 ms/op
+WorkloadResult   4: 64 op, 938721667.00 ns, 14.6675 ms/op
+WorkloadResult   5: 64 op, 948287416.00 ns, 14.8170 ms/op
+WorkloadResult   6: 64 op, 943932584.00 ns, 14.7489 ms/op
+WorkloadResult   7: 64 op, 938137291.00 ns, 14.6584 ms/op
+WorkloadResult   8: 64 op, 936248083.00 ns, 14.6289 ms/op
+WorkloadResult   9: 64 op, 948035833.00 ns, 14.8131 ms/op
+WorkloadResult  10: 64 op, 944303209.00 ns, 14.7547 ms/op
+WorkloadResult  11: 64 op, 953325292.00 ns, 14.8957 ms/op
+WorkloadResult  12: 64 op, 957160833.00 ns, 14.9556 ms/op
+WorkloadResult  13: 64 op, 932813042.00 ns, 14.5752 ms/op
+WorkloadResult  14: 64 op, 935561958.00 ns, 14.6182 ms/op
+WorkloadResult  15: 64 op, 941533458.00 ns, 14.7115 ms/op
+// GC:  54 32 12 392564632 64
+// Threading:  0 0 64
+
+// AfterAll
+// Benchmark Process 46155 has exited with code 0.
+
+// Run, Diagnostic
+// Execute: dotnet "CompareSaxVsXDocument-.NET 9.0-1.dll" --anonymousPipes 120 121 --benchmarkName Benchmark.Deserialize.Sax --job ".NET 9.0" --benchmarkId 0 in /Users/jacob/dev/me/active/ul/artifacts/bin/CompareSaxVsXDocument/release/CompareSaxVsXDocument-.NET 9.0-1/bin/Release/net9.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.15.2
+// Runtime=.NET 9.0.5 (9.0.525.21509), Arm64 RyuJIT AdvSIMD
+// GC=Concurrent Workstation
+// HardwareIntrinsics=AdvSIMD,AES,CRC32,DP,RDM,SHA1,SHA256 VectorSize=128
+// Job: .NET 9.0
+
+OverheadJitting  1: 1 op, 86584.00 ns, 86.5840 us/op
+WorkloadJitting  1: 1 op, 34023167.00 ns, 34.0232 ms/op
+
+WorkloadPilot    1: 2 op, 25926959.00 ns, 12.9635 ms/op
+WorkloadPilot    2: 3 op, 41061208.00 ns, 13.6871 ms/op
+WorkloadPilot    3: 4 op, 51417125.00 ns, 12.8543 ms/op
+WorkloadPilot    4: 5 op, 65106375.00 ns, 13.0213 ms/op
+WorkloadPilot    5: 6 op, 83291083.00 ns, 13.8818 ms/op
+WorkloadPilot    6: 7 op, 93091708.00 ns, 13.2988 ms/op
+WorkloadPilot    7: 8 op, 102438375.00 ns, 12.8048 ms/op
+WorkloadPilot    8: 9 op, 132623042.00 ns, 14.7359 ms/op
+WorkloadPilot    9: 10 op, 134896375.00 ns, 13.4896 ms/op
+WorkloadPilot   10: 11 op, 158981958.00 ns, 14.4529 ms/op
+WorkloadPilot   11: 12 op, 176841708.00 ns, 14.7368 ms/op
+WorkloadPilot   12: 13 op, 191786875.00 ns, 14.7528 ms/op
+WorkloadPilot   13: 14 op, 206844042.00 ns, 14.7746 ms/op
+WorkloadPilot   14: 15 op, 216301916.00 ns, 14.4201 ms/op
+WorkloadPilot   15: 16 op, 232689209.00 ns, 14.5431 ms/op
+WorkloadPilot   16: 32 op, 469807500.00 ns, 14.6815 ms/op
+WorkloadPilot   17: 64 op, 959520875.00 ns, 14.9925 ms/op
+
+OverheadWarmup   1: 64 op, 1250.00 ns, 19.5313 ns/op
+OverheadWarmup   2: 64 op, 250.00 ns, 3.9063 ns/op
+OverheadWarmup   3: 64 op, 375.00 ns, 5.8594 ns/op
+OverheadWarmup   4: 64 op, 250.00 ns, 3.9063 ns/op
+OverheadWarmup   5: 64 op, 208.00 ns, 3.2500 ns/op
+OverheadWarmup   6: 64 op, 208.00 ns, 3.2500 ns/op
+OverheadWarmup   7: 64 op, 375.00 ns, 5.8594 ns/op
+
+// BeforeActualRun
+WorkloadActual   1: 64 op, 949500834.00 ns, 14.8360 ms/op
+WorkloadActual   2: 64 op, 956551292.00 ns, 14.9461 ms/op
+WorkloadActual   3: 64 op, 969847875.00 ns, 15.1539 ms/op
+WorkloadActual   4: 64 op, 962514834.00 ns, 15.0393 ms/op
+WorkloadActual   5: 64 op, 953505750.00 ns, 14.8985 ms/op
+WorkloadActual   6: 64 op, 954472584.00 ns, 14.9136 ms/op
+WorkloadActual   7: 64 op, 957929125.00 ns, 14.9676 ms/op
+WorkloadActual   8: 64 op, 958594292.00 ns, 14.9780 ms/op
+WorkloadActual   9: 64 op, 944889792.00 ns, 14.7639 ms/op
+WorkloadActual  10: 64 op, 950894667.00 ns, 14.8577 ms/op
+WorkloadActual  11: 64 op, 957385500.00 ns, 14.9591 ms/op
+WorkloadActual  12: 64 op, 958310042.00 ns, 14.9736 ms/op
+WorkloadActual  13: 64 op, 956214125.00 ns, 14.9408 ms/op
+WorkloadActual  14: 64 op, 947672334.00 ns, 14.8074 ms/op
+WorkloadActual  15: 64 op, 955261625.00 ns, 14.9260 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 64 op, 949500834.00 ns, 14.8360 ms/op
+WorkloadResult   2: 64 op, 956551292.00 ns, 14.9461 ms/op
+WorkloadResult   3: 64 op, 962514834.00 ns, 15.0393 ms/op
+WorkloadResult   4: 64 op, 953505750.00 ns, 14.8985 ms/op
+WorkloadResult   5: 64 op, 954472584.00 ns, 14.9136 ms/op
+WorkloadResult   6: 64 op, 957929125.00 ns, 14.9676 ms/op
+WorkloadResult   7: 64 op, 958594292.00 ns, 14.9780 ms/op
+WorkloadResult   8: 64 op, 944889792.00 ns, 14.7639 ms/op
+WorkloadResult   9: 64 op, 950894667.00 ns, 14.8577 ms/op
+WorkloadResult  10: 64 op, 957385500.00 ns, 14.9591 ms/op
+WorkloadResult  11: 64 op, 958310042.00 ns, 14.9736 ms/op
+WorkloadResult  12: 64 op, 956214125.00 ns, 14.9408 ms/op
+WorkloadResult  13: 64 op, 947672334.00 ns, 14.8074 ms/op
+WorkloadResult  14: 64 op, 955261625.00 ns, 14.9260 ms/op
+// GC:  55 33 12 392562384 64
+// Threading:  0 0 64
+
+// AfterAll
+// Benchmark Process 46163 has exited with code 0.
+
+Mean = 14.743 ms, StdErr = 0.028 ms (0.19%), N = 15, StdDev = 0.107 ms
+Min = 14.575 ms, Q1 = 14.663 ms, Median = 14.749 ms, Q3 = 14.815 ms, Max = 14.956 ms
+IQR = 0.152 ms, LowerFence = 14.435 ms, UpperFence = 15.043 ms
+ConfidenceInterval = [14.629 ms; 14.858 ms] (CI 99.9%), Margin = 0.114 ms (0.78% of Mean)
+Skewness = 0.29, Kurtosis = 2.04, MValue = 2
+
+// ** Remained 1 (50.0%) benchmark(s) to run. Estimated finish 2025-09-01 17:49 (0h 0m from now) **
+// **************************
+// Benchmark: Deserialize.XDocument: .NET 9.0(Runtime=.NET 9.0)
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet "CompareSaxVsXDocument-.NET 9.0-1.dll" --anonymousPipes 125 134 --benchmarkName Benchmark.Deserialize.XDocument --job ".NET 9.0" --benchmarkId 1 in /Users/jacob/dev/me/active/ul/artifacts/bin/CompareSaxVsXDocument/release/CompareSaxVsXDocument-.NET 9.0-1/bin/Release/net9.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.15.2
+// Runtime=.NET 9.0.5 (9.0.525.21509), Arm64 RyuJIT AdvSIMD
+// GC=Concurrent Workstation
+// HardwareIntrinsics=AdvSIMD,AES,CRC32,DP,RDM,SHA1,SHA256 VectorSize=128
+// Job: .NET 9.0
+
+OverheadJitting  1: 1 op, 82750.00 ns, 82.7500 us/op
+WorkloadJitting  1: 1 op, 126990875.00 ns, 126.9909 ms/op
+
+WorkloadPilot    1: 2 op, 229051959.00 ns, 114.5260 ms/op
+WorkloadPilot    2: 3 op, 402388958.00 ns, 134.1297 ms/op
+WorkloadPilot    3: 4 op, 473305750.00 ns, 118.3264 ms/op
+WorkloadPilot    4: 5 op, 711038292.00 ns, 142.2077 ms/op
+
+OverheadWarmup   1: 5 op, 417.00 ns, 83.4000 ns/op
+OverheadWarmup   2: 5 op, 0.00 ns, 0.0000 ns/op
+OverheadWarmup   3: 5 op, 42.00 ns, 8.4000 ns/op
+OverheadWarmup   4: 5 op, 42.00 ns, 8.4000 ns/op
+OverheadWarmup   5: 5 op, 42.00 ns, 8.4000 ns/op
+OverheadWarmup   6: 5 op, 833.00 ns, 166.6000 ns/op
+
+// BeforeActualRun
+WorkloadActual   1: 5 op, 374967875.00 ns, 74.9936 ms/op
+WorkloadActual   2: 5 op, 353120875.00 ns, 70.6242 ms/op
+WorkloadActual   3: 5 op, 347944541.00 ns, 69.5889 ms/op
+WorkloadActual   4: 5 op, 346739625.00 ns, 69.3479 ms/op
+WorkloadActual   5: 5 op, 347115958.00 ns, 69.4232 ms/op
+WorkloadActual   6: 5 op, 346559125.00 ns, 69.3118 ms/op
+WorkloadActual   7: 5 op, 348070584.00 ns, 69.6141 ms/op
+WorkloadActual   8: 5 op, 347880292.00 ns, 69.5761 ms/op
+WorkloadActual   9: 5 op, 346403125.00 ns, 69.2806 ms/op
+WorkloadActual  10: 5 op, 346020875.00 ns, 69.2042 ms/op
+WorkloadActual  11: 5 op, 313002916.00 ns, 62.6006 ms/op
+WorkloadActual  12: 5 op, 313350917.00 ns, 62.6702 ms/op
+WorkloadActual  13: 5 op, 313721667.00 ns, 62.7443 ms/op
+WorkloadActual  14: 5 op, 314102250.00 ns, 62.8205 ms/op
+WorkloadActual  15: 5 op, 314664375.00 ns, 62.9329 ms/op
+WorkloadActual  16: 5 op, 313275750.00 ns, 62.6552 ms/op
+WorkloadActual  17: 5 op, 312203833.00 ns, 62.4408 ms/op
+WorkloadActual  18: 5 op, 311684334.00 ns, 62.3369 ms/op
+WorkloadActual  19: 5 op, 311795458.00 ns, 62.3591 ms/op
+WorkloadActual  20: 5 op, 312271625.00 ns, 62.4543 ms/op
+WorkloadActual  21: 5 op, 312142875.00 ns, 62.4286 ms/op
+WorkloadActual  22: 5 op, 312625834.00 ns, 62.5252 ms/op
+WorkloadActual  23: 5 op, 313531625.00 ns, 62.7063 ms/op
+WorkloadActual  24: 5 op, 312116667.00 ns, 62.4233 ms/op
+WorkloadActual  25: 5 op, 312972709.00 ns, 62.5945 ms/op
+WorkloadActual  26: 5 op, 310987667.00 ns, 62.1975 ms/op
+WorkloadActual  27: 5 op, 312828417.00 ns, 62.5657 ms/op
+WorkloadActual  28: 5 op, 313209084.00 ns, 62.6418 ms/op
+WorkloadActual  29: 5 op, 312419916.00 ns, 62.4840 ms/op
+WorkloadActual  30: 5 op, 313668875.00 ns, 62.7338 ms/op
+WorkloadActual  31: 5 op, 311162875.00 ns, 62.2326 ms/op
+WorkloadActual  32: 5 op, 311720250.00 ns, 62.3441 ms/op
+WorkloadActual  33: 5 op, 314072833.00 ns, 62.8146 ms/op
+WorkloadActual  34: 5 op, 312189042.00 ns, 62.4378 ms/op
+WorkloadActual  35: 5 op, 312809375.00 ns, 62.5619 ms/op
+WorkloadActual  36: 5 op, 312845667.00 ns, 62.5691 ms/op
+WorkloadActual  37: 5 op, 312444667.00 ns, 62.4889 ms/op
+WorkloadActual  38: 5 op, 312648583.00 ns, 62.5297 ms/op
+WorkloadActual  39: 5 op, 312177125.00 ns, 62.4354 ms/op
+WorkloadActual  40: 5 op, 310957166.00 ns, 62.1914 ms/op
+WorkloadActual  41: 5 op, 314211166.00 ns, 62.8422 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 5 op, 313002916.00 ns, 62.6006 ms/op
+WorkloadResult   2: 5 op, 313350917.00 ns, 62.6702 ms/op
+WorkloadResult   3: 5 op, 313721667.00 ns, 62.7443 ms/op
+WorkloadResult   4: 5 op, 314102250.00 ns, 62.8205 ms/op
+WorkloadResult   5: 5 op, 314664375.00 ns, 62.9329 ms/op
+WorkloadResult   6: 5 op, 313275750.00 ns, 62.6552 ms/op
+WorkloadResult   7: 5 op, 312203833.00 ns, 62.4408 ms/op
+WorkloadResult   8: 5 op, 311684334.00 ns, 62.3369 ms/op
+WorkloadResult   9: 5 op, 311795458.00 ns, 62.3591 ms/op
+WorkloadResult  10: 5 op, 312271625.00 ns, 62.4543 ms/op
+WorkloadResult  11: 5 op, 312142875.00 ns, 62.4286 ms/op
+WorkloadResult  12: 5 op, 312625834.00 ns, 62.5252 ms/op
+WorkloadResult  13: 5 op, 313531625.00 ns, 62.7063 ms/op
+WorkloadResult  14: 5 op, 312116667.00 ns, 62.4233 ms/op
+WorkloadResult  15: 5 op, 312972709.00 ns, 62.5945 ms/op
+WorkloadResult  16: 5 op, 310987667.00 ns, 62.1975 ms/op
+WorkloadResult  17: 5 op, 312828417.00 ns, 62.5657 ms/op
+WorkloadResult  18: 5 op, 313209084.00 ns, 62.6418 ms/op
+WorkloadResult  19: 5 op, 312419916.00 ns, 62.4840 ms/op
+WorkloadResult  20: 5 op, 313668875.00 ns, 62.7338 ms/op
+WorkloadResult  21: 5 op, 311162875.00 ns, 62.2326 ms/op
+WorkloadResult  22: 5 op, 311720250.00 ns, 62.3441 ms/op
+WorkloadResult  23: 5 op, 314072833.00 ns, 62.8146 ms/op
+WorkloadResult  24: 5 op, 312189042.00 ns, 62.4378 ms/op
+WorkloadResult  25: 5 op, 312809375.00 ns, 62.5619 ms/op
+WorkloadResult  26: 5 op, 312845667.00 ns, 62.5691 ms/op
+WorkloadResult  27: 5 op, 312444667.00 ns, 62.4889 ms/op
+WorkloadResult  28: 5 op, 312648583.00 ns, 62.5297 ms/op
+WorkloadResult  29: 5 op, 312177125.00 ns, 62.4354 ms/op
+WorkloadResult  30: 5 op, 310957166.00 ns, 62.1914 ms/op
+WorkloadResult  31: 5 op, 314211166.00 ns, 62.8422 ms/op
+// GC:  41 14 6 310093576 5
+// Threading:  0 0 5
+
+// AfterAll
+// Benchmark Process 46171 has exited with code 0.
+
+// Run, Diagnostic
+// Execute: dotnet "CompareSaxVsXDocument-.NET 9.0-1.dll" --anonymousPipes 125 134 --benchmarkName Benchmark.Deserialize.XDocument --job ".NET 9.0" --benchmarkId 1 in /Users/jacob/dev/me/active/ul/artifacts/bin/CompareSaxVsXDocument/release/CompareSaxVsXDocument-.NET 9.0-1/bin/Release/net9.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.15.2
+// Runtime=.NET 9.0.5 (9.0.525.21509), Arm64 RyuJIT AdvSIMD
+// GC=Concurrent Workstation
+// HardwareIntrinsics=AdvSIMD,AES,CRC32,DP,RDM,SHA1,SHA256 VectorSize=128
+// Job: .NET 9.0
+
+OverheadJitting  1: 1 op, 77834.00 ns, 77.8340 us/op
+WorkloadJitting  1: 1 op, 128018083.00 ns, 128.0181 ms/op
+
+WorkloadPilot    1: 2 op, 244797542.00 ns, 122.3988 ms/op
+WorkloadPilot    2: 3 op, 311390000.00 ns, 103.7967 ms/op
+WorkloadPilot    3: 4 op, 481122167.00 ns, 120.2805 ms/op
+WorkloadPilot    4: 5 op, 498203708.00 ns, 99.6407 ms/op
+WorkloadPilot    5: 6 op, 500072833.00 ns, 83.3455 ms/op
+
+OverheadWarmup   1: 6 op, 458.00 ns, 76.3333 ns/op
+OverheadWarmup   2: 6 op, 125.00 ns, 20.8333 ns/op
+OverheadWarmup   3: 6 op, 166.00 ns, 27.6667 ns/op
+OverheadWarmup   4: 6 op, 83.00 ns, 13.8333 ns/op
+OverheadWarmup   5: 6 op, 583.00 ns, 97.1667 ns/op
+OverheadWarmup   6: 6 op, 209.00 ns, 34.8333 ns/op
+
+// BeforeActualRun
+WorkloadActual   1: 6 op, 463386625.00 ns, 77.2311 ms/op
+WorkloadActual   2: 6 op, 448330333.00 ns, 74.7217 ms/op
+WorkloadActual   3: 6 op, 440143667.00 ns, 73.3573 ms/op
+WorkloadActual   4: 6 op, 436222583.00 ns, 72.7038 ms/op
+WorkloadActual   5: 6 op, 438551959.00 ns, 73.0920 ms/op
+WorkloadActual   6: 6 op, 436569833.00 ns, 72.7616 ms/op
+WorkloadActual   7: 6 op, 437320667.00 ns, 72.8868 ms/op
+WorkloadActual   8: 6 op, 424367291.00 ns, 70.7279 ms/op
+WorkloadActual   9: 6 op, 388475875.00 ns, 64.7460 ms/op
+WorkloadActual  10: 6 op, 388905000.00 ns, 64.8175 ms/op
+WorkloadActual  11: 6 op, 387842625.00 ns, 64.6404 ms/op
+WorkloadActual  12: 6 op, 388324000.00 ns, 64.7207 ms/op
+WorkloadActual  13: 6 op, 388212792.00 ns, 64.7021 ms/op
+WorkloadActual  14: 6 op, 390252958.00 ns, 65.0422 ms/op
+WorkloadActual  15: 6 op, 390230083.00 ns, 65.0383 ms/op
+WorkloadActual  16: 6 op, 388513625.00 ns, 64.7523 ms/op
+WorkloadActual  17: 6 op, 386130583.00 ns, 64.3551 ms/op
+WorkloadActual  18: 6 op, 389863417.00 ns, 64.9772 ms/op
+WorkloadActual  19: 6 op, 392523166.00 ns, 65.4205 ms/op
+WorkloadActual  20: 6 op, 392474833.00 ns, 65.4125 ms/op
+WorkloadActual  21: 6 op, 390671416.00 ns, 65.1119 ms/op
+WorkloadActual  22: 6 op, 388064334.00 ns, 64.6774 ms/op
+WorkloadActual  23: 6 op, 390817875.00 ns, 65.1363 ms/op
+WorkloadActual  24: 6 op, 386414208.00 ns, 64.4024 ms/op
+WorkloadActual  25: 6 op, 388453583.00 ns, 64.7423 ms/op
+WorkloadActual  26: 6 op, 387970166.00 ns, 64.6617 ms/op
+WorkloadActual  27: 6 op, 389800083.00 ns, 64.9667 ms/op
+WorkloadActual  28: 6 op, 388743042.00 ns, 64.7905 ms/op
+WorkloadActual  29: 6 op, 391008459.00 ns, 65.1681 ms/op
+WorkloadActual  30: 6 op, 387735000.00 ns, 64.6225 ms/op
+WorkloadActual  31: 6 op, 390289667.00 ns, 65.0483 ms/op
+WorkloadActual  32: 6 op, 388650750.00 ns, 64.7751 ms/op
+WorkloadActual  33: 6 op, 389780542.00 ns, 64.9634 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 6 op, 388475875.00 ns, 64.7460 ms/op
+WorkloadResult   2: 6 op, 388905000.00 ns, 64.8175 ms/op
+WorkloadResult   3: 6 op, 387842625.00 ns, 64.6404 ms/op
+WorkloadResult   4: 6 op, 388324000.00 ns, 64.7207 ms/op
+WorkloadResult   5: 6 op, 388212792.00 ns, 64.7021 ms/op
+WorkloadResult   6: 6 op, 390252958.00 ns, 65.0422 ms/op
+WorkloadResult   7: 6 op, 390230083.00 ns, 65.0383 ms/op
+WorkloadResult   8: 6 op, 388513625.00 ns, 64.7523 ms/op
+WorkloadResult   9: 6 op, 386130583.00 ns, 64.3551 ms/op
+WorkloadResult  10: 6 op, 389863417.00 ns, 64.9772 ms/op
+WorkloadResult  11: 6 op, 392523166.00 ns, 65.4205 ms/op
+WorkloadResult  12: 6 op, 392474833.00 ns, 65.4125 ms/op
+WorkloadResult  13: 6 op, 390671416.00 ns, 65.1119 ms/op
+WorkloadResult  14: 6 op, 388064334.00 ns, 64.6774 ms/op
+WorkloadResult  15: 6 op, 390817875.00 ns, 65.1363 ms/op
+WorkloadResult  16: 6 op, 386414208.00 ns, 64.4024 ms/op
+WorkloadResult  17: 6 op, 388453583.00 ns, 64.7423 ms/op
+WorkloadResult  18: 6 op, 387970166.00 ns, 64.6617 ms/op
+WorkloadResult  19: 6 op, 389800083.00 ns, 64.9667 ms/op
+WorkloadResult  20: 6 op, 388743042.00 ns, 64.7905 ms/op
+WorkloadResult  21: 6 op, 391008459.00 ns, 65.1681 ms/op
+WorkloadResult  22: 6 op, 387735000.00 ns, 64.6225 ms/op
+WorkloadResult  23: 6 op, 390289667.00 ns, 65.0483 ms/op
+WorkloadResult  24: 6 op, 388650750.00 ns, 64.7751 ms/op
+WorkloadResult  25: 6 op, 389780542.00 ns, 64.9634 ms/op
+// GC:  49 17 7 372110472 6
+// Threading:  0 0 6
+
+// AfterAll
+// Benchmark Process 46178 has exited with code 0.
+
+Mean = 62.541 ms, StdErr = 0.034 ms (0.05%), N = 31, StdDev = 0.189 ms
+Min = 62.191 ms, Q1 = 62.432 ms, Median = 62.530 ms, Q3 = 62.663 ms, Max = 62.933 ms
+IQR = 0.231 ms, LowerFence = 62.086 ms, UpperFence = 63.009 ms
+ConfidenceInterval = [62.417 ms; 62.665 ms] (CI 99.9%), Margin = 0.124 ms (0.20% of Mean)
+Skewness = 0.07, Kurtosis = 2.3, MValue = 2
+
+// ** Remained 0 (0.0%) benchmark(s) to run. Estimated finish 2025-09-01 17:49 (0h 0m from now) **
+// ***** BenchmarkRunner: Finish  *****
+
+// * Export *
+  BenchmarkDotNet.Artifacts/results/Benchmark.Deserialize-report.csv
+  BenchmarkDotNet.Artifacts/results/Benchmark.Deserialize-report-github.md
+  BenchmarkDotNet.Artifacts/results/Benchmark.Deserialize-report.html
+
+// * Detailed results *
+Deserialize.Sax: .NET 9.0(Runtime=.NET 9.0)
+Runtime = .NET 9.0.5 (9.0.525.21509), Arm64 RyuJIT AdvSIMD; GC = Concurrent Workstation
+Mean = 14.743 ms, StdErr = 0.028 ms (0.19%), N = 15, StdDev = 0.107 ms
+Min = 14.575 ms, Q1 = 14.663 ms, Median = 14.749 ms, Q3 = 14.815 ms, Max = 14.956 ms
+IQR = 0.152 ms, LowerFence = 14.435 ms, UpperFence = 15.043 ms
+ConfidenceInterval = [14.629 ms; 14.858 ms] (CI 99.9%), Margin = 0.114 ms (0.78% of Mean)
+Skewness = 0.29, Kurtosis = 2.04, MValue = 2
+-------------------- Histogram --------------------
+[14.560 ms ; 15.013 ms) | @@@@@@@@@@@@@@@
+---------------------------------------------------
+
+Deserialize.XDocument: .NET 9.0(Runtime=.NET 9.0)
+Runtime = .NET 9.0.5 (9.0.525.21509), Arm64 RyuJIT AdvSIMD; GC = Concurrent Workstation
+Mean = 62.541 ms, StdErr = 0.034 ms (0.05%), N = 31, StdDev = 0.189 ms
+Min = 62.191 ms, Q1 = 62.432 ms, Median = 62.530 ms, Q3 = 62.663 ms, Max = 62.933 ms
+IQR = 0.231 ms, LowerFence = 62.086 ms, UpperFence = 63.009 ms
+ConfidenceInterval = [62.417 ms; 62.665 ms] (CI 99.9%), Margin = 0.124 ms (0.20% of Mean)
+Skewness = 0.07, Kurtosis = 2.3, MValue = 2
+-------------------- Histogram --------------------
+[62.112 ms ; 63.012 ms) | @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+---------------------------------------------------
+
+// * Summary *
+
+BenchmarkDotNet v0.15.2, macOS Sequoia 15.4.1 (24E263) [Darwin 24.4.0]
+Apple M4 Max, 1 CPU, 16 logical and 16 physical cores
+.NET SDK 9.0.300
+  [Host]   : .NET 9.0.5 (9.0.525.21509), Arm64 RyuJIT AdvSIMD
+  .NET 9.0 : .NET 9.0.5 (9.0.525.21509), Arm64 RyuJIT AdvSIMD
+
+Job=.NET 9.0  Runtime=.NET 9.0  
+
+| Method    | Mean     | Error    | StdDev   | Ratio | Gen0      | Gen1      | Gen2      | Allocated | Alloc Ratio |
+|---------- |---------:|---------:|---------:|------:|----------:|----------:|----------:|----------:|------------:|
+| Sax       | 14.74 ms | 0.114 ms | 0.107 ms |  0.24 |  843.7500 |  500.0000 |  187.5000 |   5.85 MB |        0.10 |
+| XDocument | 62.54 ms | 0.124 ms | 0.189 ms |  1.00 | 8200.0000 | 2800.0000 | 1200.0000 |  59.15 MB |        1.00 |
+
+// * Hints *
+Outliers
+  Deserialize.XDocument: .NET 9.0 -> 10 outliers were removed (69.20 ms..74.99 ms)
+
+// * Legends *
+  Mean        : Arithmetic mean of all measurements
+  Error       : Half of 99.9% confidence interval
+  StdDev      : Standard deviation of all measurements
+  Ratio       : Mean of the ratio distribution ([Current]/[Baseline])
+  Gen0        : GC Generation 0 collects per 1000 operations
+  Gen1        : GC Generation 1 collects per 1000 operations
+  Gen2        : GC Generation 2 collects per 1000 operations
+  Allocated   : Allocated memory per single operation (managed only, inclusive, 1KB = 1024B)
+  Alloc Ratio : Allocated memory ratio distribution ([Current]/[Baseline])
+  1 ms        : 1 Millisecond (0.001 sec)
+
+// * Diagnostic Output - EventPipeProfiler *
+Exported 2 trace file(s). Example:
+/Users/jacob/dev/me/active/ul/sandbox/CompareSaxVsXDocument/BenchmarkDotNet.Artifacts/Benchmark.Deserialize.Sax-20250901-174809.speedscope.json
+
+// * Diagnostic Output - MemoryDiagnoser *
+
+
+// ***** BenchmarkRunner: End *****
+Run time: 00:01:10 (70.97 sec), executed benchmarks: 2
+
+Global total time: 00:01:16 (76.88 sec), executed benchmarks: 2
+// * Artifacts cleanup *
+Artifacts cleanup is finished

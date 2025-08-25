@@ -11,8 +11,10 @@ public partial class MainViewModel : IDisposable
     private readonly IRegister _register;
     private readonly ObservableList<RegisterEntry> _entries;
 
-    public MainViewModel(IApplicationService appService)
+    public MainViewModel(IApplicationService appService, TimeProvider? tp = null)
     {
+        tp ??= ObservableSystem.DefaultTimeProvider;
+
         Topmost = new(false);
 
         var registers = Registers.FromEmbedded();
@@ -35,7 +37,7 @@ public partial class MainViewModel : IDisposable
 
         Observable
             .Merge(SearchTerm, SearchUl0, SearchUl4, SearchUl8, SearchUl12)
-            .Debounce(TimeSpan.FromMilliseconds(200))
+            .Debounce(TimeSpan.FromMilliseconds(200), tp)
             .Subscribe(_ => RefreshTable());
 
         SelectedRowIndex = new();
