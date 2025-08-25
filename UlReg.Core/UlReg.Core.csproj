@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\UlReg\UlReg.csproj" />
+    <ProjectReference Include="..\RegXml\RegXml.csproj" />
   </ItemGroup>
 
 </Project>

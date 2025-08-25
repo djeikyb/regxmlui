@@ -50,7 +50,7 @@ public class RegXmlTests
         var registers = Registers.FromEmbedded();
         Assert.NotNull(registers.Groups);
         var xpath = $"//*[local-name() = 'UL' and text() = 'urn:smpte:ul:060e2b34.027f0101.0d010101.01014e00']/..";
-        var el = registers.Groups.Xml.XPathSelectElement(xpath);
+        var el = registers.Groups._doc.XPathSelectElement(xpath);
         Assert.NotNull(el);
         var symbol = el.Descendants().First(x => "Symbol".Equals(x.Name.LocalName)).Value;
         Assert.Equal("AuxiliaryDescriptor", symbol);

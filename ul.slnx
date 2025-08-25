@@ -10,5 +10,4 @@
   <Project Path="UlReg.Tests/UlReg.Tests.csproj" />
   <Project Path="UlReg.Ui.Desktop/UlReg.Ui.Desktop.csproj" />
   <Project Path="UlReg.Ui/UlReg.Ui.csproj" />
-  <Project Path="UlReg/UlReg.csproj" />
 </Solution>

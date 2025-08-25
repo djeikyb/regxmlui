@@ -1,10 +1,12 @@
-namespace UlRegBiz;
+using RegXml;
 
-public class MultiRegisterRegXmlService : IRegisterService
+namespace UlReg;
+
+public class MultiRegisterRegXmlService : IRegister
 {
-    private readonly List<RegXmlService> _services;
+    private readonly List<IRegister> _services;
 
-    public MultiRegisterRegXmlService(params RegXmlService[] services)
+    public MultiRegisterRegXmlService(params IRegister[] services)
     {
         _services = services.ToList();
     }

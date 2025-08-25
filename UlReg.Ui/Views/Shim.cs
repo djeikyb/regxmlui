@@ -1,7 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Controls.Models.TreeDataGrid;
 using R3;
-using UlRegBiz;
+using RegXml;
 
 namespace UlReg.Views;
 

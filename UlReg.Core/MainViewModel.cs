@@ -3,13 +3,12 @@ using System.Text.RegularExpressions;
 using ObservableCollections;
 using R3;
 using RegXml;
-using UlRegBiz;
 
 namespace UlReg;
 
 public partial class MainViewModel : IDisposable
 {
-    private readonly IRegisterService _register;
+    private readonly IRegister _register;
     private readonly ObservableList<RegisterEntry> _entries;
 
     public MainViewModel(IApplicationService appService)
@@ -18,11 +17,11 @@ public partial class MainViewModel : IDisposable
 
         var registers = Registers.FromEmbedded();
         _register = new MultiRegisterRegXmlService(
-            new RegXmlService(registers.Elements.Xml),
-            new RegXmlService(registers.Essence.Xml),
-            new RegXmlService(registers.Groups.Xml),
-            new RegXmlService(registers.Labels.Xml),
-            new RegXmlService(registers.Types.Xml)
+            registers.Elements,
+            registers.Essence,
+            registers.Groups,
+            registers.Labels,
+            registers.Types
         );
 
         _entries = new ObservableList<RegisterEntry>(_register.All());

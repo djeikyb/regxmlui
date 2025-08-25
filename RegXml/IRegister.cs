@@ -1,6 +1,6 @@
-namespace UlRegBiz;
+namespace RegXml;
 
-public interface IRegisterService
+public interface IRegister
 {
     IEnumerable<RegisterEntry> All();
 

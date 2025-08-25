@@ -1,4 +1,4 @@
-namespace UlRegBiz;
+namespace RegXml;
 
 public class RegisterEntry
 {

@@ -1,7 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Input;
-using UlRegBiz;
+using RegXml;
 
 namespace UlReg.Views;
 
