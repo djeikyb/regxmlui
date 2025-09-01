@@ -23,6 +23,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\sandbox\SearchBench\SearchBench.csproj" />
       <ProjectReference Include="..\UlReg.Core\UlReg.Core.csproj" />
     </ItemGroup>
 

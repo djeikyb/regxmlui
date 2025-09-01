@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/sandbox/">
+    <Project Path="sandbox/SearchBench/SearchBench.csproj" Type="Classic C#" />
+  </Folder>
   <Folder Name="/build/">
     <File Path=".editorconfig" />
     <File Path=".gitignore" />
