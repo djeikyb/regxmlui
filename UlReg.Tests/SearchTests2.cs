@@ -24,7 +24,7 @@ public class SearchTests2
     [Fact]
     public void TermOnly()
     {
-        var vm = new FilterView(_register);
+        var vm = new FilterExpressions(_register);
         vm.SearchTerm.Value = "Descriptor";
         vm.RefreshTable();
         vm.Entries.Count.Should().Be(90);
@@ -33,7 +33,7 @@ public class SearchTests2
     [Fact]
     public void CombineTermAndFirstOctet()
     {
-        var vm = new FilterView(_register);
+        var vm = new FilterExpressions(_register);
         vm.SearchTerm.Value = "_sys";
         vm.SearchUl0.Value = "060a";
         vm.RefreshTable();
@@ -43,7 +43,7 @@ public class SearchTests2
     [Fact]
     public void CombineTermAndSecondOctet()
     {
-        var vm = new FilterView(_register);
+        var vm = new FilterExpressions(_register);
         vm.SearchTerm.Value = "Descriptor";
         vm.SearchUl4.Value = "01";
         vm.RefreshTable();
@@ -53,7 +53,7 @@ public class SearchTests2
     [Fact]
     public void CombineTermAndThirdOctet()
     {
-        var vm = new FilterView(_register);
+        var vm = new FilterExpressions(_register);
         vm.SearchTerm.Value = "Descriptor";
         vm.SearchUl8.Value = "03";
         vm.RefreshTable();
@@ -63,7 +63,7 @@ public class SearchTests2
     [Fact]
     public void CombineTermAndFourthOctet()
     {
-        var vm = new FilterView(_register);
+        var vm = new FilterExpressions(_register);
         vm.SearchTerm.Value = "Descriptor";
         vm.SearchUl12.Value = "01012";
         vm.RefreshTable();
@@ -73,7 +73,7 @@ public class SearchTests2
     [Fact]
     public void CombineFirstAndThirdOctet()
     {
-        var vm = new FilterView(_register);
+        var vm = new FilterExpressions(_register);
         vm.SearchUl0.Value = "060a";
         vm.SearchUl8.Value = "010103";
         vm.RefreshTable();

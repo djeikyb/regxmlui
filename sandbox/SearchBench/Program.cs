@@ -50,12 +50,12 @@ public class SearchBenchJobs
         return Paces(vm);
     }
 
-    // [Benchmark]
-    // public IReadOnlyCollection<RegisterEntry> Filter()
-    // {
-    //     var vm = new FilterView(_register);
-    //     return Paces(vm);
-    // }
+    [Benchmark]
+    public IReadOnlyCollection<RegisterEntry> Filter()
+    {
+        var vm = new FilterExpressions(_register);
+        return Paces(vm);
+    }
 
     private NotifyCollectionChangedSynchronizedViewList<RegisterEntry> Paces(IMvm vm)
     {
