@@ -38,11 +38,13 @@ public class FilterView : IMvm
         }
         else
         {
-            var d = _register.Search(
+            var found = _register.Search(
                 SearchTerm.Value,
                 SearchUl0.Value, SearchUl4.Value,
-                SearchUl8.Value, SearchUl12.Value).ToDictionary(x => x.Ul.ToOctets());
-            _entriesView.AttachFilter((re) => d.ContainsKey(re.Ul.ToOctets()));
+                SearchUl8.Value, SearchUl12.Value);
+            var d = found.ToDictionary(x => x.Ul.ToOctets());
+            if (d.Count == 0) _entriesView.AttachFilter(_ => false);
+            else _entriesView.AttachFilter((re) => d.ContainsKey(re.Ul.ToOctets()));
         }
     }
 

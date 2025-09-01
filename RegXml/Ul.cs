@@ -5,16 +5,18 @@ namespace RegXml;
 public class Ul
 {
     private readonly ReadOnlyMemory<byte> _value;
+    private readonly string _octets;
 
-    public Ul(ReadOnlyMemory<byte> value)
+    public Ul(ReadOnlyMemory<byte> value, string octet)
     {
         Debug.Assert(value.Length == 16, "UL are always sixteen bytes.");
         _value = value;
+        _octets = octet;
     }
 
     public ReadOnlyMemory<byte> Bytes => _value;
 
-    public static Ul FromUrn(string urn)
+    public static Ul FromUrn(ReadOnlySpan<char> urn)
     {
         const int expectedLength = 48;
         if (urn.Length != expectedLength)
@@ -23,7 +25,9 @@ public class Ul
             );
 
         // 0..13 should be "urn:smpte:ul:", but is it worth checking?
-        urn = urn.Substring(13);
+        urn = urn.Slice(13);
+
+        var s_octets = new string(urn.Slice(0, 35));
 
         var octets = new byte[16];
         for (int idxUrn = 0, idxOctets = 0; idxUrn < urn.Length;)
@@ -51,7 +55,7 @@ public class Ul
             octets[idxOctets++] = b;
         }
 
-        return new Ul(octets);
+        return new Ul(octets, s_octets);
     }
 
     internal static byte C2B(char c) => c switch
@@ -80,12 +84,15 @@ public class Ul
 
     public string ToOctets()
     {
-        var s = _value.Span;
-        var p1 = Convert.ToHexString(s.Slice(0, 4));
-        var p2 = Convert.ToHexString(s.Slice(4, 4));
-        var p3 = Convert.ToHexString(s.Slice(8, 4));
-        var p4 = Convert.ToHexString(s.Slice(12, 4));
-        return $"{p1}.{p2}.{p3}.{p4}";
+        return _octets;
+        // if (_octets is not null) return _octets;
+        // var s = _value.Span;
+        // var p1 = Convert.ToHexString(s.Slice(0, 4));
+        // var p2 = Convert.ToHexString(s.Slice(4, 4));
+        // var p3 = Convert.ToHexString(s.Slice(8, 4));
+        // var p4 = Convert.ToHexString(s.Slice(12, 4));
+        // _octets = $"{p1}.{p2}.{p3}.{p4}";
+        // return _octets;
     }
 }
 
