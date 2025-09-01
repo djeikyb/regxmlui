@@ -18,7 +18,7 @@ public class Registers
         return zip;
     }
 
-    public static Registers FromEmbedded()
+    public static Registers FromXPath()
     {
         Register? essence = null;
         Register? types = null;
@@ -32,19 +32,44 @@ public class Registers
             switch (entry.Name)
             {
                 case "Essence.xml":
-                    essence = new Register(entry.Open());
+                    using (var s = entry.Open())
+                    {
+                        var doc = XDocument.Load(s);
+                        essence = new Register(DeserializeAll(doc).ToList());
+                    }
+
                     break;
                 case "Types.xml":
-                    types = new Register(entry.Open());
+                    using (var s = entry.Open())
+                    {
+                        var doc = XDocument.Load(s);
+                        types = new Register(DeserializeAll(doc).ToList());
+                    }
+
                     break;
                 case "Labels.xml":
-                    labels = new Register(entry.Open());
+                    using (var s = entry.Open())
+                    {
+                        var doc = XDocument.Load(s);
+                        labels = new Register(DeserializeAll(doc).ToList());
+                    }
+
                     break;
                 case "Groups.xml":
-                    groups = new Register(entry.Open());
+                    using (var s = entry.Open())
+                    {
+                        var doc = XDocument.Load(s);
+                        groups = new Register(DeserializeAll(doc).ToList());
+                    }
+
                     break;
                 case "Elements.xml":
-                    elements = new Register(entry.Open());
+                    using (var s = entry.Open())
+                    {
+                        var doc = XDocument.Load(s);
+                        elements = new Register(DeserializeAll(doc).ToList());
+                    }
+
                     break;
             }
         }
@@ -72,18 +97,36 @@ public class Registers
     public required Register Elements { get; init; }
 
     public IEnumerable<Register> All => [Elements, Essence, Groups, Labels, Types];
+
+    private static IEnumerable<RegisterEntry> DeserializeAll(XDocument doc)
+    {
+        var xpath = $"//*[local-name() = 'Entry']/*[local-name() = 'UL']/..";
+        var found = doc.XPathSelectElements(xpath);
+        return found.Select(
+            el =>
+            {
+                var urn = el.Descendants().First(x => "UL".Equals(x.Name.LocalName)).Value;
+                var ul = Ul.FromUrn(urn);
+                var symbol = el.Descendants().First(x => "Symbol".Equals(x.Name.LocalName)).Value;
+                var register = el.Descendants().First(x => "Register".Equals(x.Name.LocalName)).Value;
+                var defDoc = el.Descendants().FirstOrDefault(x => "DefiningDocument".Equals(x.Name.LocalName))?.Value;
+                return new RegisterEntry()
+                {
+                    Register = register, Ul = ul, Symbol = symbol, DefiningDocument = defDoc,
+                };
+            }
+        );
+    }
 }
 
 public class Register : IRegister
 {
     private readonly IReadOnlyCollection<RegisterEntry> _entries;
-    internal readonly XDocument _doc;
 
     /// You own the stream and should close it.
-    public Register(Stream stream)
+    public Register(IReadOnlyCollection<RegisterEntry> entries)
     {
-        _doc = XDocument.Load(stream);
-        _entries = DeserializeAll(_doc).ToList();
+        _entries = entries;
     }
 
     public IEnumerable<RegisterEntry> All() => _entries;
@@ -135,35 +178,5 @@ public class Register : IRegister
 
 
         return q.ToList();
-    }
-
-    public bool EntryPropertyAlwaysExists(string property)
-    {
-        const string xpathTotal = "count(//*[local-name() = 'Entries']/*[local-name() = 'Entry'])";
-        var totalElements = (double)_doc.XPathEvaluate(xpathTotal);
-        string xpathForProperty =
-            $"count(//*[local-name() = 'Entries']/*[local-name() = 'Entry']/*[local-name() = '{property}'])";
-        var elementsWithProperty = (double)_doc.XPathEvaluate(xpathForProperty);
-        return Convert.ToInt64(totalElements) == Convert.ToInt64(elementsWithProperty);
-    }
-
-    private IEnumerable<RegisterEntry> DeserializeAll(XDocument doc)
-    {
-        var xpath = $"//*[local-name() = 'Entry']/*[local-name() = 'UL']/..";
-        var found = doc.XPathSelectElements(xpath);
-        return found.Select(
-            el =>
-            {
-                var urn = el.Descendants().First(x => "UL".Equals(x.Name.LocalName)).Value;
-                var ul = Ul.FromUrn(urn);
-                var symbol = el.Descendants().First(x => "Symbol".Equals(x.Name.LocalName)).Value;
-                var register = el.Descendants().First(x => "Register".Equals(x.Name.LocalName)).Value;
-                var defDoc = el.Descendants().FirstOrDefault(x => "DefiningDocument".Equals(x.Name.LocalName))?.Value;
-                return new RegisterEntry()
-                {
-                    Register = register, Ul = ul, Symbol = symbol, DefiningDocument = defDoc,
-                };
-            }
-        );
     }
 }

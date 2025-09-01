@@ -11,7 +11,7 @@ public class SearchTests2
 
     static SearchTests2()
     {
-        var registers = Registers.FromEmbedded();
+        var registers = Registers.FromXPath();
         _register = new MultiRegisterRegXmlService(
             registers.Elements,
             registers.Essence,

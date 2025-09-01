@@ -27,7 +27,7 @@ public class SearchBenchJobs
 
     static SearchBenchJobs()
     {
-        var registers = Registers.FromEmbedded();
+        var registers = Registers.FromXPath();
         _register = new MultiRegisterRegXmlService(
             registers.Elements,
             registers.Essence,

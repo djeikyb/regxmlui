@@ -11,7 +11,7 @@ public class SearchTestsRawBools
 
     static SearchTestsRawBools()
     {
-        var registers = Registers.FromEmbedded();
+        var registers = Registers.FromXPath();
         _register = new MultiRegisterRegXmlService(
             registers.Elements,
             registers.Essence,

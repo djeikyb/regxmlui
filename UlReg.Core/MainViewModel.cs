@@ -17,7 +17,7 @@ public partial class MainViewModel : IDisposable
 
         Topmost = new(false);
 
-        var registers = Registers.FromEmbedded();
+        var registers = Registers.FromXPath();
         _register = new MultiRegisterRegXmlService(
             registers.Elements,
             registers.Essence,

@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using System.IO.Compression;
 using System.Text;
+using System.Xml.Linq;
 using System.Xml.XPath;
 using RegXml;
 using TurboXml;
@@ -22,6 +23,7 @@ public class SaxTests(ITestOutputHelper Console)
             var found = zip.Entries.FirstOrDefault(x => x.Name.Equals($"{r}.xml"));
             Assert.NotNull(found);
             var entryCounter = new EntryCounter();
+            double xcount;
             var ms = new MemoryStream();
             using (var z = found.Open())
             {
@@ -41,18 +43,20 @@ public class SaxTests(ITestOutputHelper Console)
 
                 const string xpathTotal = "count(//*[local-name() = 'Entries']/*[local-name() = 'Entry'])";
                 ms.Position = 0;
-                _ = (double)new Register(ms)._doc.XPathEvaluate(xpathTotal);
+                var doc = XDocument.Load(ms);
+                _ = (double)doc.XPathEvaluate(xpathTotal);
                 ms.Position = 0;
-                _ = (double)new Register(ms)._doc.XPathEvaluate(xpathTotal);
+                _ = (double)doc.XPathEvaluate(xpathTotal);
                 ms.Position = 0;
-                _ = (double)new Register(ms)._doc.XPathEvaluate(xpathTotal);
+                _ = (double)doc.XPathEvaluate(xpathTotal);
                 xpath.Start();
                 ms.Position = 0;
-                _ = (double)new Register(ms)._doc.XPathEvaluate(xpathTotal);
+                xcount = (double)doc.XPathEvaluate(xpathTotal);
                 xpath.Stop();
             }
 
             Console.WriteLine(r.PadLeft(8) + ": " + entryCounter.Count);
+            Console.WriteLine(r.PadLeft(8) + ": " + xcount);
         }
 
         Console.WriteLine($"  sax in: {sax.ElapsedMilliseconds}");
