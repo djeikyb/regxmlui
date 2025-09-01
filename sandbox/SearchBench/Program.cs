@@ -1,4 +1,5 @@
 using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Diagnosers;
 using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Running;
 using ObservableCollections;
@@ -18,8 +19,8 @@ class Program
 
 [MemoryDiagnoser]
 [SimpleJob(RuntimeMoniker.Net90)]
-// [SimpleJob(RuntimeMoniker.NativeAot90)]
-// [EventPipeProfiler(EventPipeProfile.CpuSampling)]
+[SimpleJob(RuntimeMoniker.NativeAot90)]
+[EventPipeProfiler(EventPipeProfile.CpuSampling)]
 public class SearchBenchJobs
 {
     private static readonly MultiRegisterRegXmlService _register;
@@ -37,21 +38,28 @@ public class SearchBenchJobs
     }
 
     [Benchmark(Baseline = true)]
-    public NotifyCollectionChangedSynchronizedViewList<RegisterEntry> Search()
+    public NotifyCollectionChangedSynchronizedViewList<RegisterEntry> Baseline()
     {
         var vm = new MvmClearAdd(_register);
         return Paces(vm);
     }
 
     [Benchmark]
-    public NotifyCollectionChangedSynchronizedViewList<RegisterEntry> Search2()
+    public NotifyCollectionChangedSynchronizedViewList<RegisterEntry> BaselineCacheOctetStringParts()
     {
         var vm = new MvmClearAddSearch2(_register);
         return Paces(vm);
     }
 
     [Benchmark]
-    public IReadOnlyCollection<RegisterEntry> Filter()
+    public IReadOnlyCollection<RegisterEntry> FilterRawBools()
+    {
+        var vm = new FilterRawBools(_register);
+        return Paces(vm);
+    }
+
+    [Benchmark]
+    public IReadOnlyCollection<RegisterEntry> FilterExpressions()
     {
         var vm = new FilterExpressions(_register);
         return Paces(vm);
