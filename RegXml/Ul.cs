@@ -4,6 +4,10 @@ public class Ul
 {
     private readonly ReadOnlyMemory<byte> _value;
     private readonly string _octets;
+    public readonly string _s_oct0;
+    public readonly string _s_oct4;
+    public readonly string _s_oct8;
+    public readonly string _s_oct12;
 
     public Ul(ReadOnlySpan<char> urn)
     {
@@ -15,6 +19,11 @@ public class Ul
 
         // 0..13 should be "urn:smpte:ul:", but is it worth checking?
         urn = urn.Slice(13);
+
+        _s_oct0 = new string(urn.Slice(0, 8));
+        _s_oct4 = new string(urn.Slice(9, 8)); // urn[8] is separator
+        _s_oct8 = new string(urn.Slice(18, 8)); // urn[18] is separator
+        _s_oct12 = new string(urn.Slice(27, 8)); // 35 + 13 == 48, expected length!
 
         var s_octets = new string(urn.Slice(0, 35));
 

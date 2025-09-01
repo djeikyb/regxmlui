@@ -11,4 +11,12 @@ public interface IRegister
         string? u8 = null,
         string? u12 = null
     );
+
+    IEnumerable<RegisterEntry> Search2(
+        string? term,
+        string? u0 = null,
+        string? u4 = null,
+        string? u8 = null,
+        string? u12 = null
+    );
 }

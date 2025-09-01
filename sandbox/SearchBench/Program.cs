@@ -37,18 +37,25 @@ public class SearchBenchJobs
     }
 
     [Benchmark(Baseline = true)]
-    public NotifyCollectionChangedSynchronizedViewList<RegisterEntry> ClearAddRange()
+    public NotifyCollectionChangedSynchronizedViewList<RegisterEntry> Search()
     {
         var vm = new MvmClearAdd(_register);
         return Paces(vm);
     }
 
     [Benchmark]
-    public IReadOnlyCollection<RegisterEntry> Filter()
+    public NotifyCollectionChangedSynchronizedViewList<RegisterEntry> Search2()
     {
-        var vm = new FilterView(_register);
+        var vm = new MvmClearAddSearch2(_register);
         return Paces(vm);
     }
+
+    // [Benchmark]
+    // public IReadOnlyCollection<RegisterEntry> Filter()
+    // {
+    //     var vm = new FilterView(_register);
+    //     return Paces(vm);
+    // }
 
     private NotifyCollectionChangedSynchronizedViewList<RegisterEntry> Paces(IMvm vm)
     {
