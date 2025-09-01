@@ -11,7 +11,7 @@ public class MultiRegisterRegXmlService : IRegister
         _services = services.ToList();
     }
 
-    public IEnumerable<RegisterEntry> All()
+    public IReadOnlyCollection<RegisterEntry> All()
     {
         var all = new List<RegisterEntry>();
         foreach (var service in _services)

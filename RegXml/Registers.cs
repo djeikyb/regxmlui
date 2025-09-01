@@ -1,9 +1,11 @@
 ﻿using System.IO.Compression;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using System.Xml.XPath;
+using TurboXml;
 
 namespace RegXml;
 
@@ -90,6 +92,78 @@ public class Registers
         };
     }
 
+    public static Registers FromSax()
+    {
+        SaxEntry[]? essence = null;
+        SaxEntry[]? types = null;
+        SaxEntry[]? labels = null;
+        SaxEntry[]? groups = null;
+        SaxEntry[]? elements = null;
+        using var z = new ZipArchive(Open());
+
+        foreach (var entry in z.Entries)
+        {
+            switch (entry.Name)
+            {
+                case "Essence.xml":
+                {
+                    var sax = new SaxRegisterReader(RegisterName.Essence);
+                    using var entryStream = entry.Open();
+                    XmlParser.Parse(entryStream, ref sax, new XmlParserOptions(Encoding.UTF8));
+                    essence = sax.Entries;
+                    break;
+                }
+                case "Types.xml":
+                {
+                    var sax = new SaxRegisterReader(RegisterName.Types);
+                    using var entryStream = entry.Open();
+                    XmlParser.Parse(entryStream, ref sax, new XmlParserOptions(Encoding.UTF8));
+                    types = sax.Entries;
+                    break;
+                }
+                case "Labels.xml":
+                {
+                    var sax = new SaxRegisterReader(RegisterName.Labels);
+                    using var entryStream = entry.Open();
+                    XmlParser.Parse(entryStream, ref sax, new XmlParserOptions(Encoding.UTF8));
+                    labels = sax.Entries;
+                    break;
+                }
+                case "Groups.xml":
+                {
+                    var sax = new SaxRegisterReader(RegisterName.Groups);
+                    using var entryStream = entry.Open();
+                    XmlParser.Parse(entryStream, ref sax, new XmlParserOptions(Encoding.UTF8));
+                    groups = sax.Entries;
+                    break;
+                }
+                case "Elements.xml":
+                {
+                    var sax = new SaxRegisterReader(RegisterName.Elements);
+                    using var entryStream = entry.Open();
+                    XmlParser.Parse(entryStream, ref sax, new XmlParserOptions(Encoding.UTF8));
+                    elements = sax.Entries;
+                    break;
+                }
+            }
+        }
+
+        if (essence == null) throw new RegisterLoadException("essence");
+        if (types == null) throw new RegisterLoadException("types");
+        if (labels == null) throw new RegisterLoadException("labels");
+        if (groups == null) throw new RegisterLoadException("groups");
+        if (elements == null) throw new RegisterLoadException("elements");
+
+        return new Registers
+        {
+            Essence = new Register(essence),
+            Types = new Register(types),
+            Labels = new Register(labels),
+            Groups = new Register(groups),
+            Elements = new Register(elements)
+        };
+    }
+
     public required Register Essence { get; init; }
     public required Register Types { get; init; }
     public required Register Labels { get; init; }
@@ -129,7 +203,19 @@ public class Register : IRegister
         _entries = entries;
     }
 
-    public IEnumerable<RegisterEntry> All() => _entries;
+    public Register(IEnumerable<SaxEntry> saxEntries) : this(saxEntries.Select(x =>
+        new RegisterEntry
+        {
+            // unit tests prove not null, safe to bang
+            Register = x.Register!,
+            Symbol = x.Symbol!,
+            Ul = x.Ul!,
+            DefiningDocument = x.DefiningDocument,
+        }).ToArray())
+    {
+    }
+
+    public IReadOnlyCollection<RegisterEntry> All() => _entries;
 
     public IEnumerable<RegisterEntry> Search(
         string? term,

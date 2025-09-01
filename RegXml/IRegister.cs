@@ -2,7 +2,7 @@ namespace RegXml;
 
 public interface IRegister
 {
-    IEnumerable<RegisterEntry> All();
+    IReadOnlyCollection<RegisterEntry> All();
 
     IEnumerable<RegisterEntry> Search(
         string? term,
