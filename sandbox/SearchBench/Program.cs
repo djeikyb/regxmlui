@@ -45,13 +45,6 @@ public class SearchBenchJobs
     }
 
     [Benchmark]
-    public NotifyCollectionChangedSynchronizedViewList<RegisterEntry> BaselineCacheOctetStringParts()
-    {
-        var vm = new MvmClearAddSearch2(_register);
-        return Paces(vm);
-    }
-
-    [Benchmark]
     public IReadOnlyCollection<RegisterEntry> FilterRawBools()
     {
         var vm = new FilterRawBools(_register);

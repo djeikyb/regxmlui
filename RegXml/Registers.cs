@@ -97,55 +97,6 @@ public class Register : IRegister
     )
     {
         var q = _entries.AsQueryable();
-        if (u0 is { Length: > 0 }) q = q.Where(re => OctetStartsWith(0, re.Ul, u0));
-        if (u4 is { Length: > 0 }) q = q.Where(re => OctetStartsWith(4, re.Ul, u4));
-        if (u8 is { Length: > 0 }) q = q.Where(re => OctetStartsWith(8, re.Ul, u8));
-        if (u12 is { Length: > 0 }) q = q.Where(re => OctetStartsWith(12, re.Ul, u12));
-        if (term is { Length: > 2 })
-        {
-            var t = Regex.Replace(term, "-|:| ", ".");
-            Expression<Func<RegisterEntry, bool>> chain = re =>
-                re.Symbol.StartsWith(term, StringComparison.InvariantCultureIgnoreCase);
-            if (term is { Length: <= 8 })
-            {
-                Expression<Func<RegisterEntry, bool>> p0 = re => OctetStartsWith(0, re.Ul, t);
-                Expression<Func<RegisterEntry, bool>> p4 = re => OctetStartsWith(4, re.Ul, t);
-                Expression<Func<RegisterEntry, bool>> p8 = re => OctetStartsWith(8, re.Ul, t);
-                Expression<Func<RegisterEntry, bool>> p12 = re => OctetStartsWith(12, re.Ul, t);
-                chain = chain.Or(p0).Or(p4).Or(p8).Or(p12);
-            }
-
-            if (term is { Length: > 4 and <= 35 })
-            {
-                chain = chain.Or(re => re.Ul.ToOctets().Contains(t, StringComparison.InvariantCultureIgnoreCase));
-            }
-
-            if (term is { Length: >= 3 })
-            {
-                chain = chain.Or(re => re.Symbol.Contains(term, StringComparison.InvariantCultureIgnoreCase));
-            }
-
-            if (term is { Length: >= 3 })
-            {
-                chain = chain.Or(re => re.DefiningDocument != null && re.DefiningDocument.Contains(term, StringComparison.InvariantCultureIgnoreCase));
-            }
-
-            q = q.Where(chain);
-        }
-
-
-        return q.ToList();
-    }
-
-    public IEnumerable<RegisterEntry> Search2(
-        string? term,
-        string? u0 = null,
-        string? u4 = null,
-        string? u8 = null,
-        string? u12 = null
-    )
-    {
-        var q = _entries.AsQueryable();
         if (u0 is { Length: > 0 }) q = q.Where(re => re.Ul._s_oct0.StartsWith(u0));
         if (u4 is { Length: > 0 }) q = q.Where(re => re.Ul._s_oct4.StartsWith(u4));
         if (u8 is { Length: > 0 }) q = q.Where(re => re.Ul._s_oct8.StartsWith(u8));
@@ -184,12 +135,6 @@ public class Register : IRegister
 
 
         return q.ToList();
-    }
-
-    public static bool OctetStartsWith(int octet, Ul ul, string search)
-    {
-        return Convert.ToHexString(ul.Bytes.Span.Slice(octet, 4))
-            .StartsWith(search, StringComparison.InvariantCultureIgnoreCase);
     }
 
     public bool EntryPropertyAlwaysExists(string property)

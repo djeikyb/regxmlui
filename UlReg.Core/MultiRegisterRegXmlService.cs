@@ -32,15 +32,4 @@ public class MultiRegisterRegXmlService : IRegister
 
         return found;
     }
-
-    public IEnumerable<RegisterEntry> Search2(string? term, string? u0 = null, string? u4 = null, string? u8 = null, string? u12 = null)
-    {
-        var found = new List<RegisterEntry>();
-        foreach (var service in _services)
-        {
-            found.AddRange(service.Search2(term, u0, u4, u8, u12));
-        }
-
-        return found;
-    }
 }

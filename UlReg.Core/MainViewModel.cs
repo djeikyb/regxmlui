@@ -127,7 +127,7 @@ public partial class MainViewModel : IDisposable
         else
         {
             _entries.AddRange(
-                _register.Search2(
+                _register.Search(
                     SearchTerm.Value,
                     SearchUl0.Value, SearchUl4.Value,
                     SearchUl8.Value, SearchUl12.Value)
