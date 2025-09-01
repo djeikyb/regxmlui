@@ -1,22 +1,11 @@
-﻿using System.Diagnostics;
-
-namespace RegXml;
+﻿namespace RegXml;
 
 public class Ul
 {
     private readonly ReadOnlyMemory<byte> _value;
     private readonly string _octets;
 
-    public Ul(ReadOnlyMemory<byte> value, string octet)
-    {
-        Debug.Assert(value.Length == 16, "UL are always sixteen bytes.");
-        _value = value;
-        _octets = octet;
-    }
-
-    public ReadOnlyMemory<byte> Bytes => _value;
-
-    public static Ul FromUrn(ReadOnlySpan<char> urn)
+    public Ul(ReadOnlySpan<char> urn)
     {
         const int expectedLength = 48;
         if (urn.Length != expectedLength)
@@ -55,7 +44,15 @@ public class Ul
             octets[idxOctets++] = b;
         }
 
-        return new Ul(octets, s_octets);
+        _octets = s_octets;
+        _value = octets;
+    }
+
+    public ReadOnlyMemory<byte> Bytes => _value;
+
+    public static Ul FromUrn(ReadOnlySpan<char> urn)
+    {
+        return new Ul(urn);
     }
 
     internal static byte C2B(char c) => c switch
