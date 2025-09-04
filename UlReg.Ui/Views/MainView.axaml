@@ -101,6 +101,18 @@
       Margin="0 0 0 0"
       Padding="0 0 0 0"
       Name="MyTreeDataGrid">
+
+      <TreeDataGrid.ContextFlyout>
+        <MenuFlyout FlyoutPresenterClasses="appMenuFlyout">
+
+          <MenuItem Header="Copy Symbol" Command="{Binding CopySymbol}" />
+          <MenuItem Header="Copy Label" Command="{Binding CopyUlNoPrefixCommand}" />
+          <MenuItem Header="Copy Urn" Command="{Binding CopyUlWithPrefixCommand}" />
+          <MenuItem Header="Copy Document" Command="{Binding CopyDocument}" />
+
+        </MenuFlyout>
+      </TreeDataGrid.ContextFlyout>
+
       <TreeDataGrid.Styles>
         <Style Selector="TreeDataGridTextCell">
           <!--

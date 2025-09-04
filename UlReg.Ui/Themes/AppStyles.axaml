@@ -41,4 +41,14 @@
     <Setter Property="Background" Value="{DynamicResource StatusBar_Background}" />
   </Style>
 
+  <Style Selector="MenuFlyoutPresenter.appMenuFlyout">
+    <Setter Property="FontSize" Value="12" />
+    <Style Selector="^ /template/ ItemsPresenter#PART_ItemsPresenter">
+      <Setter Property="Margin" Value="5" />
+    </Style>
+    <Style Selector="^ MenuItem">
+      <Setter Property="CornerRadius" Value="3" />
+    </Style>
+  </Style>
+
 </Styles>

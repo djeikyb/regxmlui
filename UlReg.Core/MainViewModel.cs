@@ -68,6 +68,22 @@ public partial class MainViewModel : IDisposable
             appService.SetClipboardText(re.Ul.ToUrn());
         });
 
+        CopySymbol = new(_ =>
+        {
+            var re = SelectedRow.Value;
+            if (re is null) return;
+            var s = re.Symbol;
+            appService.SetClipboardText(s);
+        });
+
+        CopyDocument = new ReactiveCommand(_ =>
+        {
+            var re = SelectedRow.Value;
+            if (re is null) return;
+            if (re.DefiningDocument != null)
+                appService.SetClipboardText(re.DefiningDocument);
+        });
+
         OpenDefiningDocument = new();
         OpenDefiningDocument.Subscribe(_ =>
         {
@@ -136,6 +152,8 @@ public partial class MainViewModel : IDisposable
     public BindableReactiveProperty<RegisterEntry?> SelectedRow { get; }
     public ReactiveCommand<Unit> CopyUlNoPrefixCommand { get; }
     public ReactiveCommand<Unit> CopyUlWithPrefixCommand { get; }
+    public ReactiveCommand<Unit> CopySymbol { get; }
+    public ReactiveCommand<Unit> CopyDocument { get; }
     public ReactiveCommand<Unit> OpenDefiningDocument { get; }
 
     public void RefreshTable()
