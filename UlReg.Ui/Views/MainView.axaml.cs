@@ -23,16 +23,30 @@ public partial class MainView : UserControl
         {
             // only pay attention to platform copy key-bindings
             var hotkeys = TopLevel.GetTopLevel(this)?.PlatformSettings?.HotkeyConfiguration;
-            if (hotkeys is null || !hotkeys.Copy.Any(g => g.Matches(e))) return;
+            if (hotkeys is null) return;
+
+            // and also cmd+shift+c, for the black turtleneck crowd
+            // ctrl+shift+c accommodates a typical linux keyboard layout
+            KeyModifiers m;
+            if (OperatingSystem.IsMacOS()) m = KeyModifiers.Meta;
+            else m = KeyModifiers.Control;
+            var chordmod = e.KeyModifiers;
+            var shiftcopy = chordmod.HasFlag(m) && chordmod.HasFlag(KeyModifiers.Shift) && e.Key == Key.C;
+
+            if (!shiftcopy && !hotkeys.Copy.Any(g => g.Matches(e))) return;
 
             // handle copy
+
             Console.WriteLine($"⚡️ {nameof(MyTreeDataGrid)} copy!");
             var tdg = (TreeDataGrid)sender!;
             if (tdg.RowSelection is not { SelectedItem: { } row }) return;
             if (row is not RegisterEntry re) return;
             var vm = (MainViewModel?)DataContext;
             if (vm == null) return;
-            vm.CopyCommand.Execute(re);
+
+            if (shiftcopy) vm.CopyUlWithPrefixCommand.Execute(re);
+            else vm.CopyUlNoPrefixCommand.Execute(re);
+
             e.Handled = true;
         };
 

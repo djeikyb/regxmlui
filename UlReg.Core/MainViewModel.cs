@@ -41,12 +41,21 @@ public partial class MainViewModel : IDisposable
             .Subscribe(_ => RefreshTable());
 
         SelectedRowIndex = new();
-        CopyCommand = new();
-        CopyCommand.Subscribe(re =>
+
+        CopyUlNoPrefixCommand = new();
+        CopyUlNoPrefixCommand.Subscribe(re =>
         {
             Console.WriteLine($"🍝 copyCOPYcopy");
             appService.SetClipboardText(re.Ul.ToOctets());
         });
+
+        CopyUlWithPrefixCommand = new();
+        CopyUlWithPrefixCommand.Subscribe(re =>
+        {
+            Console.WriteLine($"🍝 copyCOPYcopy");
+            appService.SetClipboardText(re.Ul.ToUrn());
+        });
+
         OpenDefiningDocument = new();
         OpenDefiningDocument.Subscribe(re =>
         {
@@ -109,7 +118,8 @@ public partial class MainViewModel : IDisposable
     public BindableReactiveProperty<string?> SearchUl12 { get; }
     public NotifyCollectionChangedSynchronizedViewList<RegisterEntry> EntriesView { get; }
     public BindableReactiveProperty<int> SelectedRowIndex { get; }
-    public ReactiveCommand<RegisterEntry> CopyCommand { get; }
+    public ReactiveCommand<RegisterEntry> CopyUlNoPrefixCommand { get; }
+    public ReactiveCommand<RegisterEntry> CopyUlWithPrefixCommand { get; }
     public ReactiveCommand<RegisterEntry> OpenDefiningDocument { get; }
 
     internal void RefreshTable()
