@@ -1,12 +1,30 @@
+using System.Collections.Specialized;
 using Avalonia.Controls;
+using Avalonia.Controls.Models.TreeDataGrid;
 using Avalonia.Controls.Primitives;
 using Avalonia.Input;
+using R3;
 using RegXml;
 
 namespace UlReg.Views;
 
 public partial class MainView : UserControl
 {
+    public static FlatTreeDataGridSource<RegisterEntry> CreateSource<T>(T source)
+        where T : IEnumerable<RegisterEntry>, INotifyCollectionChanged
+    {
+        return new FlatTreeDataGridSource<RegisterEntry>(source)
+        {
+            Columns =
+            {
+                new TextColumn<RegisterEntry, string>("Register", x => x.Register, new GridLength(0, GridUnitType.Auto)),
+                new TextColumn<RegisterEntry, string>("Symbol", x => x.Symbol, new GridLength(1, GridUnitType.Star)),
+                new TextColumn<RegisterEntry, string>("Document", x => x.DefiningDocument, new GridLength(.5, GridUnitType.Star)),
+                new TextColumn<RegisterEntry, string>("UL", x => x.Ul.ToOctets()),
+            },
+        };
+    }
+
     public MainView()
     {
         InitializeComponent();
@@ -18,6 +36,31 @@ public partial class MainView : UserControl
         //     var binding = new Binding { Source = vm.SearchTerm, Path = nameof(vm.SearchTerm.Value) };
         //     InputSearchTerm.Bind(TextBlock.TextProperty, binding);
         // };
+
+        DataContextChanged += (sender, _) =>
+        {
+            var old = (FlatTreeDataGridSource<RegisterEntry>?)MyTreeDataGrid.Source;
+            if (sender is not MainView v)
+                throw new Exception(
+                    $"Unexpected sender for MainView::DataContextChanged. Expected MainView, got {sender?.GetType().Name}.");
+
+            if (v.DataContext is not MainViewModel vm)
+            {
+                var n = v.DataContext?.GetType().Name ?? "null";
+                throw new Exception($"Unexpected FileBrowser::DataContext. Expected {nameof(MainViewModel)}, got {n}.");
+            }
+
+            var source = CreateSource(vm.EntriesView);
+            MyTreeDataGrid.Source = source;
+            if (old is not null)
+                old.Dispose();
+
+            source.RowSelection!.SingleSelect = false;
+            source.RowSelection
+                .ObservePropertyChanged(x => x.Count)
+                .Subscribe(x => vm.SelectedRowsCount.Value = x);
+
+        };
 
         MyTreeDataGrid.KeyDown += (sender, e) =>
         {
@@ -65,4 +108,5 @@ public partial class MainView : UserControl
             vm.OpenDefiningDocument.Execute((RegisterEntry)cells.DataContext!);
         };
     }
+
 }

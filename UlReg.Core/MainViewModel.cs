@@ -40,6 +40,7 @@ public partial class MainViewModel : IDisposable
             .Debounce(TimeSpan.FromMilliseconds(200), tp)
             .Subscribe(_ => RefreshTable());
 
+        SelectedRowsCount = new(0);
         SelectedRowIndex = new();
 
         CopyUlNoPrefixCommand = new();
@@ -117,6 +118,7 @@ public partial class MainViewModel : IDisposable
     public BindableReactiveProperty<string?> SearchUl8 { get; }
     public BindableReactiveProperty<string?> SearchUl12 { get; }
     public NotifyCollectionChangedSynchronizedViewList<RegisterEntry> EntriesView { get; }
+    public BindableReactiveProperty<int> SelectedRowsCount { get; }
     public BindableReactiveProperty<int> SelectedRowIndex { get; }
     public ReactiveCommand<RegisterEntry> CopyUlNoPrefixCommand { get; }
     public ReactiveCommand<RegisterEntry> CopyUlWithPrefixCommand { get; }
@@ -260,5 +262,6 @@ public partial class MainViewModel : IDisposable
         SearchUl4.Dispose();
         SearchUl8.Dispose();
         SearchUl12.Dispose();
+        SelectedRowsCount.Dispose();
     }
 }
