@@ -3,6 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.Models.TreeDataGrid;
 using Avalonia.Controls.Primitives;
 using Avalonia.Input;
+using ObservableCollections;
 using R3;
 using RegXml;
 
@@ -25,9 +26,28 @@ public partial class MainView : UserControl
         };
     }
 
+    private DisposableBag _datacontextDisposables;
+
     public MainView()
     {
         InitializeComponent();
+
+        var tableTyping = new ObservableList<char>();
+
+        MyTreeDataGrid.TextInput += (_, e) =>
+        {
+            if (e.Text != null)
+                tableTyping.AddRange(e.Text.ToCharArray());
+        };
+
+        tableTyping.ObserveAdd()
+            .Debounce(TimeSpan.FromMilliseconds(500))
+            .Subscribe(_ =>
+            {
+                if (tableTyping.Count is 0) return;
+                tableTyping.Clear();
+            });
+
         // this.DataContextChanged += (sender, args) =>
         // {
         //     var view = (MainView)sender!;
@@ -39,7 +59,8 @@ public partial class MainView : UserControl
 
         DataContextChanged += (sender, _) =>
         {
-            var old = (FlatTreeDataGridSource<RegisterEntry>?)MyTreeDataGrid.Source;
+            _datacontextDisposables.Clear();
+
             if (sender is not MainView v)
                 throw new Exception(
                     $"Unexpected sender for MainView::DataContextChanged. Expected MainView, got {sender?.GetType().Name}.");
@@ -50,16 +71,35 @@ public partial class MainView : UserControl
                 throw new Exception($"Unexpected FileBrowser::DataContext. Expected {nameof(MainViewModel)}, got {n}.");
             }
 
-            var source = CreateSource(vm.EntriesView);
-            MyTreeDataGrid.Source = source;
-            if (old is not null)
-                old.Dispose();
+            var source = CreateSource(vm.EntriesView).AddTo(ref _datacontextDisposables);
 
-            source.RowSelection!.SingleSelect = false;
+            v.MyTreeDataGrid.Source = source;
+
+            source.RowSelection!.SingleSelect = true;
             source.RowSelection
                 .ObservePropertyChanged(x => x.Count)
                 .Subscribe(x => vm.SelectedRowsCount.Value = x);
 
+            tableTyping.ObserveAdd().SubscribeAwait((_, _) =>
+                {
+                    if (v.MyTreeDataGrid.RowsPresenter is null) return ValueTask.CompletedTask;
+                    var typed = string.Join(null, tableTyping);
+                    var max = source.Rows.Count;
+                    for (int i = 0; i < max; i++)
+                    {
+                        var re = (RegisterEntry)source.Rows[i].Model!;
+                        if (re.Symbol.StartsWith(typed, StringComparison.OrdinalIgnoreCase))
+                        {
+                            var modelIndex = source.Rows.RowIndexToModelIndex(i);
+                            source.RowSelection.Select(modelIndex);
+                            v.MyTreeDataGrid.RowsPresenter.BringIntoView(i);
+                            break;
+                        }
+                    }
+
+                    return ValueTask.CompletedTask;
+                }, AwaitOperation.Switch)
+                .AddTo(ref _datacontextDisposables);
         };
 
         MyTreeDataGrid.KeyDown += (sender, e) =>
