@@ -202,6 +202,8 @@ public partial class MainViewModel : IDisposable
         }
         else
         {
+            if (term.StartsWith("urn:smpte:ul:", StringComparison.OrdinalIgnoreCase))
+                term = term.Substring(13);
             var t = Regex.Replace(term, "-|:| ", ".");
             termMatches = re.Symbol.StartsWith(term, StringComparison.InvariantCultureIgnoreCase);
 
