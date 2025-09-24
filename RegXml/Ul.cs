@@ -1,3 +1,5 @@
+using CommunityToolkit.HighPerformance.Buffers;
+
 namespace RegXml;
 
 public class Ul
@@ -20,10 +22,10 @@ public class Ul
         // 0..13 should be "urn:smpte:ul:", but is it worth checking?
         urn = urn.Slice(13);
 
-        _s_oct0 = new string(urn.Slice(0, 8));
-        _s_oct4 = new string(urn.Slice(9, 8)); // urn[8] is separator
-        _s_oct8 = new string(urn.Slice(18, 8)); // urn[18] is separator
-        _s_oct12 = new string(urn.Slice(27, 8)); // 35 + 13 == 48, expected length!
+        _s_oct0 = StringPool.Shared.GetOrAdd(urn.Slice(0, 8));
+        _s_oct4 = StringPool.Shared.GetOrAdd(urn.Slice(9, 8)); // urn[8] is separator
+        _s_oct8 = StringPool.Shared.GetOrAdd(urn.Slice(18, 8)); // urn[18] is separator
+        _s_oct12 = StringPool.Shared.GetOrAdd(urn.Slice(27, 8)); // 35 + 13 == 48, expected length!
 
         var s_octets = new string(urn.Slice(0, 35));
 
