@@ -1,13 +1,14 @@
 <Solution>
-  <Folder Name="/sandbox/">
-    <Project Path="sandbox/SearchBench/SearchBench.csproj" Type="Classic C#" />
-    <Project Path="sandbox/CompareSaxVsXDocument/CompareSaxVsXDocument.csproj" />
-  </Folder>
   <Folder Name="/build/">
     <File Path=".editorconfig" />
     <File Path=".gitignore" />
     <File Path="Directory.Build.props" />
     <File Path="global.json" />
+  </Folder>
+  <Folder Name="/sandbox/">
+    <Project Path="sandbox/CompareSaxVsXDocument/CompareSaxVsXDocument.csproj" />
+    <Project Path="sandbox/SearchBench/SearchBench.csproj" Type="Classic C#" />
+    <Project Path="sandbox\SearchBaseline\SearchBaseline.csproj" Type="Classic C#" />
   </Folder>
   <Project Path="TurboXml/src/TurboXml/TurboXml.csproj" />
   <Project Path="RegXml/RegXml.csproj" />
