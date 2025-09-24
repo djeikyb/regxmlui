@@ -191,7 +191,13 @@ public partial class MainViewModel : IDisposable
     {
         var octetsMatch = true;
         if (u0 is { Length: > 0 }) octetsMatch = octetsMatch && re.Ul._s_oct0.StartsWith(u0, StringComparison.OrdinalIgnoreCase);
-        if (u4 is { Length: > 0 }) octetsMatch = octetsMatch && re.Ul._s_oct4.StartsWith(u4, StringComparison.OrdinalIgnoreCase);
+        if (u4 is { Length: > 0 })
+        {
+            if (u4.StartsWith("0253"))
+                u4 = "027f" + u4.Substring(4);
+            octetsMatch = octetsMatch && re.Ul._s_oct4.StartsWith(u4, StringComparison.OrdinalIgnoreCase);
+        }
+
         if (u8 is { Length: > 0 }) octetsMatch = octetsMatch && re.Ul._s_oct8.StartsWith(u8, StringComparison.OrdinalIgnoreCase);
         if (u12 is { Length: > 0 }) octetsMatch = octetsMatch && re.Ul._s_oct12.StartsWith(u12, StringComparison.OrdinalIgnoreCase);
 
@@ -204,6 +210,9 @@ public partial class MainViewModel : IDisposable
         {
             if (term.StartsWith("urn:smpte:ul:", StringComparison.OrdinalIgnoreCase))
                 term = term.Substring(13);
+            else if (term.StartsWith("060e2b34.0253", StringComparison.OrdinalIgnoreCase))
+                term = "060e2b34.027f" + term.Substring(13);
+
             var t = Regex.Replace(term, "-|:| ", ".");
             termMatches = re.Symbol.StartsWith(term, StringComparison.InvariantCultureIgnoreCase);
 
