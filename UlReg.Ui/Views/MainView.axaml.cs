@@ -78,7 +78,8 @@ public partial class MainView : UserControl
             source.RowSelection!.SingleSelect = true;
             source.RowSelection
                 .ObservePropertyChanged(x => x.Count)
-                .Subscribe(x => vm.SelectedRowsCount.Value = x);
+                .Subscribe(x => vm.SelectedRowsCount.Value = x)
+                .AddTo(ref _datacontextDisposables);
 
             tableTyping.ObserveAdd().SubscribeAwait((_, _) =>
                 {
