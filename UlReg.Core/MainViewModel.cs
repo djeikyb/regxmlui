@@ -44,25 +44,36 @@ public partial class MainViewModel : IDisposable
             .Subscribe(_ => RefreshTable());
 
         SelectedRowsCount = new(0);
-        SelectedRowIndex = new();
+        SelectedRow = new();
 
         CopyUlNoPrefixCommand = new();
-        CopyUlNoPrefixCommand.Subscribe(re =>
+        CopyUlNoPrefixCommand.Subscribe(_ =>
         {
             Console.WriteLine($"🍝 copyCOPYcopy");
+
+            var re = SelectedRow.Value;
+            if (re is null) return;
+
             appService.SetClipboardText(re.Ul.ToOctets());
         });
 
         CopyUlWithPrefixCommand = new();
-        CopyUlWithPrefixCommand.Subscribe(re =>
+        CopyUlWithPrefixCommand.Subscribe(_ =>
         {
             Console.WriteLine($"🍝 copyCOPYcopy");
+
+            var re = SelectedRow.Value;
+            if (re is null) return;
+
             appService.SetClipboardText(re.Ul.ToUrn());
         });
 
         OpenDefiningDocument = new();
-        OpenDefiningDocument.Subscribe(re =>
+        OpenDefiningDocument.Subscribe(_ =>
         {
+            var re = SelectedRow.Value;
+            if (re is null) return;
+
             if (re.DefiningDocument is not { } defDoc) return;
             var parsed = ParseDefiningDocumentField(defDoc);
             if (parsed is null) return;
@@ -103,11 +114,11 @@ public partial class MainViewModel : IDisposable
 
             if (files.Count == 1)
             {
-                using var _ = Process.Start(new ProcessStartInfo("open", files[0]) { UseShellExecute = true });
+                using var __ = Process.Start(new ProcessStartInfo("open", files[0]) { UseShellExecute = true });
             }
             else
             {
-                using var _ = Process.Start(new ProcessStartInfo(location) { UseShellExecute = true });
+                using var __ = Process.Start(new ProcessStartInfo(location) { UseShellExecute = true });
             }
 
             Console.WriteLine($"\tfound:\n{string.Join('\n', files.Select(x => $"\t\t{x}"))}");
@@ -122,10 +133,10 @@ public partial class MainViewModel : IDisposable
     public BindableReactiveProperty<string?> SearchUl12 { get; }
     public NotifyCollectionChangedSynchronizedViewList<RegisterEntry> EntriesView { get; }
     public BindableReactiveProperty<int> SelectedRowsCount { get; }
-    public BindableReactiveProperty<int> SelectedRowIndex { get; }
-    public ReactiveCommand<RegisterEntry> CopyUlNoPrefixCommand { get; }
-    public ReactiveCommand<RegisterEntry> CopyUlWithPrefixCommand { get; }
-    public ReactiveCommand<RegisterEntry> OpenDefiningDocument { get; }
+    public BindableReactiveProperty<RegisterEntry?> SelectedRow { get; }
+    public ReactiveCommand<Unit> CopyUlNoPrefixCommand { get; }
+    public ReactiveCommand<Unit> CopyUlWithPrefixCommand { get; }
+    public ReactiveCommand<Unit> OpenDefiningDocument { get; }
 
     public void RefreshTable()
     {

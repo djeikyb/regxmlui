@@ -76,9 +76,15 @@ public partial class MainView : UserControl
             v.MyTreeDataGrid.Source = source;
 
             source.RowSelection!.SingleSelect = true;
+
             source.RowSelection
                 .ObservePropertyChanged(x => x.Count)
                 .Subscribe(x => vm.SelectedRowsCount.Value = x)
+                .AddTo(ref _datacontextDisposables);
+
+            source.RowSelection
+                .ObservePropertyChanged(x => x.SelectedItem)
+                .Subscribe(x => vm.SelectedRow.Value = x)
                 .AddTo(ref _datacontextDisposables);
 
             tableTyping.ObserveAdd().SubscribeAwait((_, _) =>
@@ -128,8 +134,8 @@ public partial class MainView : UserControl
             var vm = (MainViewModel?)DataContext;
             if (vm == null) return;
 
-            if (shiftcopy) vm.CopyUlWithPrefixCommand.Execute(re);
-            else vm.CopyUlNoPrefixCommand.Execute(re);
+            if (shiftcopy) vm.CopyUlWithPrefixCommand.Execute(Unit.Default);
+            else vm.CopyUlNoPrefixCommand.Execute(Unit.Default);
 
             e.Handled = true;
         };
@@ -146,7 +152,7 @@ public partial class MainView : UserControl
 
             Console.WriteLine($"⚡️ double-tapped a row!");
             var vm = (MainViewModel)tdg.DataContext!;
-            vm.OpenDefiningDocument.Execute((RegisterEntry)cells.DataContext!);
+            vm.OpenDefiningDocument.Execute(Unit.Default);
         };
     }
 
